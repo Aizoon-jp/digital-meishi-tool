@@ -12,7 +12,7 @@
 - Phase 8: API統合 — スキップ（API統合なし）
 - [ ] Phase 9: E2Eテスト（Agent 9）— モバイル表示・QR読み取りテスト
 - [ ] Phase 10: ローカル動作確認（Agent 10）
-- [ ] Phase 11: デプロイ（Agent 11）— GitHub Pages公開・QRコード最終生成
+- [x] Phase 11: デプロイ（Agent 11）— GitHub Pages公開・QRコード最終生成
 
 ## 開発フロー
 ```
@@ -31,7 +31,7 @@ Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 → Phase 9 → Phase 10
 | ID | 成果物 | 形式 | 着手 | 完了 |
 |----|--------|------|------|------|
 | A-001 | 名刺画像（最適化済み） | JPEG 86KB | [x] | [x] |
-| A-002 | QRコード | PNG 1000x1000px+ | [ ] | [ ] |
+| A-002 | QRコード | PNG 1325x1325px | [x] | [x] |
 
 ## サポートツール（必要に応じて使用）
 | ツール | 解説 |
