@@ -3,7 +3,7 @@
 ## Phase進捗
 
 - [x] Phase 1: 要件定義（Agent 1）
-- [ ] Phase 2: Git管理（Agent 2）
+- [x] Phase 2: Git管理（Agent 2）
 - [ ] Phase 3: フロントエンド基盤（Agent 3）— 静的HTML/CSS/JSの構築
 - [ ] Phase 4: ページ実装（Agent 4）— 名刺ページのデザイン・アニメーション実装
 - [ ] Phase 5: 環境構築（Agent 5）— 画像最適化・QRコード生成
