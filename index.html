@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aizoon Systems - 藍澤 和博</title>
+  <meta name="description" content="次世代AIの開発力で、あなたの理想を形に - Aizoon Systems 藍澤 和博">
+  <meta property="og:title" content="Aizoon Systems - 藍澤 和博">
+  <meta property="og:description" content="次世代AIの開発力で、あなたの理想を形に">
+  <meta property="og:image" content="assets/card.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      background-color: #1a1f2e;
+      font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+      padding: 2rem 1rem;
+    }
+
+    .card-container {
+      opacity: 0;
+      transform: translateY(-60px);
+      animation: slideDown 1s ease-out 0.3s forwards;
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .card-wrapper {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .shine {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 70%,
+        transparent 100%
+      );
+      animation: shineMove 1.2s ease-in-out 1.5s forwards;
+      pointer-events: none;
+    }
+
+    .link-section {
+      margin-top: 2.5rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease-out 2.5s forwards;
+    }
+
+    .link-section a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #c5795a;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 2rem;
+      border: 1px solid rgba(197, 121, 90, 0.4);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .link-section a:hover {
+      background-color: rgba(197, 121, 90, 0.1);
+      border-color: #c5795a;
+    }
+
+    .link-section a svg {
+      width: 18px;
+      height: 18px;
+      fill: #c5795a;
+    }
+
+    .link-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(197, 121, 90, 0.4);
+      margin: 1.5rem auto;
+      opacity: 0;
+      animation: fadeUp 0.6s ease-out 3s forwards;
+    }
+
+    .contact-info {
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.6s ease-out 3.2s forwards;
+    }
+
+    .contact-info a {
+      color: rgba(197, 121, 90, 0.7);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .contact-info a:hover {
+      color: #c5795a;
+    }
+
+    @keyframes slideDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shineMove {
+      to {
+        left: 150%;
+      }
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+
+      .card-container {
+        max-width: 100%;
+      }
+
+      .link-section a {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card-wrapper">
+      <img src="assets/card.jpg" alt="Aizoon Systems - 藍澤 和博 名刺" class="card-img" loading="lazy">
+      <div class="shine"></div>
+    </div>
+
+    <div class="link-section">
+      <a href="https://aizoon.jp" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        aizoon.jp
+      </a>
+    </div>
+
+    <div class="link-divider"></div>
+
+    <div class="contact-info">
+      <a href="mailto:info@aizoon.jp">info@aizoon.jp</a>
+    </div>
+  </div>
+</body>
+</html>
