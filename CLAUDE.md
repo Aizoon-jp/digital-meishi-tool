@@ -63,8 +63,8 @@
 ### デプロイ
 - デプロイはユーザーの明示的な承認を得てから実行する
 - デプロイ先: GitHub Pages
-- リポジトリ名: digital-card
-- GitHubアカウント名はデプロイフェーズで確認
+- リポジトリ名: digital-meishi-tool
+- GitHubアカウント: Aizoon-jp
 
 ### ドキュメント管理
 許可されたドキュメントのみ作成可能:
@@ -75,3 +75,23 @@
 ## Playwright
 
 スクリーンショット保存先: /tmp/bluelamp-screenshots/
+
+## CI/CD設定
+
+### GitHub Actions（PR時に自動実行）
+| チェック | 対象 | コマンド |
+|---------|------|---------|
+| TypeScript | frontend | `npx tsc --noEmit` |
+| Lint (JS/TS) | frontend | `npm run lint` |
+| Build | frontend | `npm run build` |
+| Lint (Python) | backend | `flake8 --max-line-length=120` |
+| Format (Python) | backend | `black --check --line-length=120` |
+
+### ブランチ戦略
+- `main`: 本番環境
+- `develop`: 開発統合ブランチ
+- `feature/*`: 機能開発ブランチ
+
+### リポジトリ
+- URL: https://github.com/Aizoon-jp/digital-meishi-tool
+- 公開設定: Private
