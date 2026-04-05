@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>確認 - デジタル名刺メーカー</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/confirm.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <h1>内容を確認</h1>
+    <p>選択内容をご確認ください</p>
+  </header>
+
+  <div class="confirm-content">
+
+    <!-- Card Preview -->
+    <section class="confirm-section">
+      <h2 class="confirm-label">名刺プレビュー</h2>
+      <div class="card-preview-wrap" id="card-preview-wrap">
+        <div class="card-preview" id="card-preview">
+          <img id="preview-card-img" src="" alt="名刺プレビュー">
+        </div>
+      </div>
+      <button class="play-btn" id="preview-play-btn" type="button" style="margin:0.75rem auto;display:flex">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        アニメーション再生
+      </button>
+    </section>
+
+    <!-- Settings Summary -->
+    <section class="confirm-section">
+      <h2 class="confirm-label">設定内容</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="summary-key">QRデザイン</span>
+          <span class="summary-value" id="sum-qr"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-key">Zoom背景</span>
+          <span class="summary-value" id="sum-bg"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-key">アニメーション</span>
+          <span class="summary-value" id="sum-anim"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-key">ページ背景</span>
+          <span class="summary-value" id="sum-card-bg"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-key">リンク</span>
+          <span class="summary-value" id="sum-link"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Price -->
+    <section class="confirm-section price-section">
+      <div class="price-display">
+        <span class="price-label">お支払い金額</span>
+        <span class="price-amount">&yen;1,100<small>（税込）</small></span>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="confirm-nav">
+      <a href="index.html" class="btn btn-secondary">戻って修正</a>
+      <button class="btn btn-primary" id="btn-agree" type="button">
+        同意して決済へ進む
+      </button>
+    </div>
+
+    <!-- Agreement (inline) -->
+    <div class="agreement-area" id="agreement-area">
+      <label class="checkbox-wrap">
+        <input type="checkbox" id="agree-terms">
+        <span><a href="#" id="terms-link">利用規約</a>に同意します</span>
+      </label>
+      <label class="checkbox-wrap">
+        <input type="checkbox" id="agree-tokushoho">
+        <span><a href="#" id="tokushoho-link">特定商取引法に基づく表記</a>を確認しました</span>
+      </label>
+    </div>
+  </div>
+
+  <script type="module" src="js/confirm-page.js"></script>
+</body>
+</html>

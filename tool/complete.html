@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>完了 - デジタル名刺メーカー</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/complete.css">
+  <script src="https://unpkg.com/qr-code-styling@1.8.4/lib/qr-code-styling.js"></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="complete-icon">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--color-success)">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+    </div>
+    <h1>名刺が完成しました！</h1>
+    <p>以下からダウンロードしてご利用ください</p>
+  </header>
+
+  <div class="complete-content">
+
+    <!-- Downloads -->
+    <section class="complete-section">
+      <h2 class="complete-label">ダウンロード</h2>
+      <div class="download-grid">
+        <div class="download-item">
+          <div class="download-preview" id="dl-qr-preview"></div>
+          <h3>QRコード</h3>
+          <p>1200 x 1200px PNG</p>
+          <button class="btn btn-primary btn-full" id="dl-qr-btn" type="button">
+            ダウンロード
+          </button>
+        </div>
+        <div class="download-item">
+          <div class="download-preview" id="dl-bg-preview">
+            <canvas id="bg-canvas" width="384" height="216"></canvas>
+          </div>
+          <h3>Zoom背景</h3>
+          <p>1920 x 1080px PNG</p>
+          <button class="btn btn-primary btn-full" id="dl-bg-btn" type="button">
+            ダウンロード
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Share -->
+    <section class="complete-section">
+      <h2 class="complete-label">シェアする</h2>
+      <p class="share-desc">SNSでシェアすると次回<strong>¥100 OFF</strong>クーポンがもらえます</p>
+      <div class="share-grid">
+        <a class="share-btn share-x" id="share-x" href="#" target="_blank" rel="noopener">
+          𝕏 でシェア
+        </a>
+        <a class="share-btn share-line" id="share-line" href="#" target="_blank" rel="noopener">
+          LINE でシェア
+        </a>
+      </div>
+    </section>
+
+    <!-- Referral -->
+    <section class="complete-section">
+      <h2 class="complete-label">紹介コード</h2>
+      <p class="referral-desc">お知り合いに紹介すると、あなたにも¥100 OFFクーポンが届きます</p>
+      <div class="referral-code-wrap">
+        <code class="referral-code" id="referral-code">DIJICA-XXXX</code>
+        <button class="btn btn-secondary" id="copy-referral" type="button">コピー</button>
+      </div>
+    </section>
+
+    <!-- Aizoon Services -->
+    <section class="complete-section promo-section">
+      <h2 class="complete-label">もっとこだわりたい方へ</h2>
+      <div class="promo-grid">
+        <div class="promo-item">
+          <h3>完全カスタムデザイン</h3>
+          <p class="promo-price">¥5,500〜</p>
+          <p>プロが1からデザインする、あなただけの名刺</p>
+          <a class="btn btn-secondary btn-full" href="https://lin.ee/" target="_blank" rel="noopener">
+            LINE で相談
+          </a>
+        </div>
+        <div class="promo-item">
+          <h3>LP制作</h3>
+          <p class="promo-price">¥55,000〜</p>
+          <p>名刺から誘導するランディングページの制作</p>
+          <a class="btn btn-secondary btn-full" href="https://lin.ee/" target="_blank" rel="noopener">
+            LINE で相談
+          </a>
+        </div>
+      </div>
+      <div class="powered-by">
+        <p>Powered by <strong>Aizoon Systems</strong></p>
+      </div>
+    </section>
+
+    <!-- Create Another -->
+    <div class="create-another">
+      <a href="index.html" class="btn btn-secondary">もう一枚作る</a>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/complete-page.js"></script>
+</body>
+</html>

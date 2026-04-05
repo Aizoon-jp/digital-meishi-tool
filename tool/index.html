@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デジタル名刺メーカー</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/tool.css">
+  <script src="https://unpkg.com/qr-code-styling@1.8.4/lib/qr-code-styling.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <h1>デジタル名刺メーカー</h1>
+    <p>QRコードで届く、あなただけのデジタル名刺を作成しましょう</p>
+  </header>
+
+  <!-- Step Indicator -->
+  <div class="step-indicator">
+    <div class="step-dot active"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+  </div>
+
+  <!-- Section 1: QR Code Design -->
+  <section class="section" id="section-qr">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">1</span>
+        QRコードデザイン
+      </h2>
+      <p class="section-desc">形・色・背景を選んでQRコードをカスタマイズ</p>
+
+      <div class="qr-layout">
+        <div class="qr-controls" id="qr-customizer">
+          <!-- JS で3ステップUI生成 -->
+        </div>
+        <div class="qr-sticky-preview">
+          <div class="qr-preview-area" id="qr-preview">
+            <!-- QR プレビューが入る -->
+          </div>
+        </div>
+      </div>
+      <p id="qr-contrast-warning" class="qr-warning"></p>
+    </div>
+  </section>
+
+  <!-- Section 2: Zoom Background -->
+  <section class="section" id="section-zoom-bg">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">2</span>
+        Zoom背景テンプレート
+      </h2>
+      <p class="section-desc">QRコードを配置するZoom背景を選んでください</p>
+
+      <div class="bg-template-grid" id="zoom-bg-grid">
+        <!-- JS で生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Card Image Upload -->
+  <section class="section" id="section-upload">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">3</span>
+        名刺画像アップロード
+      </h2>
+      <p class="section-desc">QRコードを読み取った際に表示される名刺画像</p>
+
+      <div class="upload-area" id="upload-area">
+        <svg class="upload-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+        </svg>
+        <p class="upload-text">
+          <strong>クリックまたはドラッグ&ドロップ</strong>で画像を選択
+        </p>
+        <p class="upload-hint">JPEG / PNG 形式、500KB以下</p>
+      </div>
+      <input type="file" id="card-image-input" accept="image/jpeg,image/png" hidden>
+      <p id="upload-error" style="display:none;color:var(--color-error);font-size:0.85rem;margin-top:0.5rem"></p>
+    </div>
+  </section>
+
+  <!-- Section 4: Link Configuration -->
+  <section class="section" id="section-link">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">4</span>
+        リンク設定
+      </h2>
+      <p class="section-desc">名刺ページにWebサイトへのリンクを表示できます</p>
+
+      <div class="link-config">
+        <div class="toggle-wrap">
+          <input type="checkbox" class="toggle" id="link-toggle">
+          <label class="toggle-label" for="link-toggle">リンクを表示する</label>
+        </div>
+
+        <div class="link-url-input" id="link-url-wrap">
+          <input type="url" class="input-field" id="link-url"
+                 placeholder="https://example.com">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Animation Selection -->
+  <section class="section" id="section-animation">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">5</span>
+        カード登場アニメーション
+      </h2>
+      <p class="section-desc">名刺が画面に現れるときの演出を選んでください</p>
+
+      <div class="anim-grid" id="anim-grid">
+        <!-- JS で生成 -->
+      </div>
+
+      <button class="play-btn" id="play-anim-btn" type="button">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        プレビュー再生
+      </button>
+
+      <div class="preview-container" id="anim-preview">
+        <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+          <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Card Page Background -->
+  <section class="section" id="section-card-bg">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">6</span>
+        名刺ページの背景
+      </h2>
+      <p class="section-desc">QRコードで開いたときのページ背景色を選んでください</p>
+
+      <div class="card-bg-grid" id="card-bg-grid">
+        <!-- JS で生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <div class="nav-footer">
+    <button class="btn btn-primary" id="btn-next" type="button">
+      確認画面へ進む
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

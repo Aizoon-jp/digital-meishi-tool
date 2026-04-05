@@ -1,0 +1,398 @@
+/* ===========================
+   10 Card Animation Patterns
+   =========================== */
+
+/* Reset for replay */
+.anim-reset {
+  opacity: 0;
+}
+
+/* --- 1. Slide Down --- */
+.anim-slide-down {
+  animation: animSlideDown 1s ease-out forwards;
+}
+@keyframes animSlideDown {
+  from { opacity: 0; transform: translateY(-60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 2. Fade In --- */
+.anim-fade-in {
+  animation: animFadeIn 1.2s ease forwards;
+}
+@keyframes animFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- 3. Scale In --- */
+.anim-scale-in {
+  animation: animScaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes animScaleIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* --- 4. Flip In --- */
+.anim-flip-in {
+  animation: animFlipIn 1s ease-out forwards;
+  perspective: 800px;
+}
+@keyframes animFlipIn {
+  from { opacity: 0; transform: perspective(800px) rotateY(90deg); }
+  to   { opacity: 1; transform: perspective(800px) rotateY(0); }
+}
+
+/* --- 5. Bounce In --- */
+.anim-bounce-in {
+  animation: animBounceIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes animBounceIn {
+  0%   { opacity: 0; transform: scale(0.3); }
+  50%  { opacity: 1; transform: scale(1.08); }
+  70%  { transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* --- 6. Slide Up --- */
+.anim-slide-up {
+  animation: animSlideUp 1s ease-out forwards;
+}
+@keyframes animSlideUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 7. Rotate In --- */
+.anim-rotate-in {
+  animation: animRotateIn 0.9s ease-out forwards;
+}
+@keyframes animRotateIn {
+  from { opacity: 0; transform: rotate(-8deg) scale(0.85); }
+  to   { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+/* --- 8. Blur Fade --- */
+.anim-blur-fade {
+  animation: animBlurFade 1.2s ease-out forwards;
+}
+@keyframes animBlurFade {
+  from { opacity: 0; filter: blur(12px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+/* --- 9. Shine Effect --- */
+.anim-shine {
+  animation: animFadeIn 0.8s ease forwards;
+}
+.anim-shine .shine-overlay {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 70%,
+    transparent 100%
+  );
+  animation: animShineMove 1.2s ease-in-out 0.6s forwards;
+  pointer-events: none;
+}
+@keyframes animShineMove {
+  to { left: 150%; }
+}
+
+/* --- 10. Cascade --- */
+.anim-cascade {
+  animation: animCascade 1.4s ease-out forwards;
+}
+@keyframes animCascade {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.9); }
+  30%  { opacity: 1; transform: translateY(0) scale(1); }
+  45%  { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+  55%  { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(197, 121, 90, 0.3); }
+  70%  { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(197, 121, 90, 0.3), 0 0 0 12px rgba(197, 121, 90, 0.1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+}
+
+/* Cascade with child elements (for actual card pages) */
+.anim-cascade-items .cascade-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: animCascadeItem 0.6s ease-out forwards;
+}
+.anim-cascade-items .cascade-item:nth-child(1) { animation-delay: 0s; }
+.anim-cascade-items .cascade-item:nth-child(2) { animation-delay: 0.15s; }
+.anim-cascade-items .cascade-item:nth-child(3) { animation-delay: 0.3s; }
+.anim-cascade-items .cascade-item:nth-child(4) { animation-delay: 0.45s; }
+@keyframes animCascadeItem {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 11. Sparkle (キラキラ) --- */
+.anim-sparkle {
+  animation: animSparkleEntry 1.5s ease-out forwards;
+}
+.anim-sparkle::before,
+.anim-sparkle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.4) 10%,
+    transparent 20%,
+    rgba(255, 180, 100, 0.3) 30%,
+    transparent 40%,
+    rgba(255, 215, 0, 0.4) 50%,
+    transparent 60%,
+    rgba(255, 180, 100, 0.3) 70%,
+    transparent 80%,
+    rgba(255, 215, 0, 0.3) 90%,
+    transparent 100%
+  );
+  animation: animSparkleRotate 2s linear 0.3s forwards;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+}
+.anim-sparkle::after {
+  animation-delay: 0.6s;
+  animation-direction: reverse;
+  width: 160%;
+  height: 160%;
+}
+@keyframes animSparkleEntry {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-10deg); filter: brightness(3); }
+  40%  { opacity: 1; transform: scale(1.08) rotate(2deg); filter: brightness(1.5); }
+  60%  { transform: scale(0.97) rotate(-1deg); filter: brightness(1.2); }
+  80%  { transform: scale(1.02); filter: brightness(1.05); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: brightness(1); }
+}
+@keyframes animSparkleRotate {
+  0%   { opacity: 0; transform: translate(-50%, -50%) rotate(0deg) scale(0.5); }
+  30%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+}
+
+/* --- 12. Transformation (変身) --- */
+.anim-transform {
+  animation: animTransform 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.anim-transform::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 105, 180, 0.6) 0%,
+    rgba(255, 182, 193, 0.3) 30%,
+    rgba(147, 112, 219, 0.2) 50%,
+    transparent 70%
+  );
+  animation: animTransformGlow 2s ease-out forwards;
+  pointer-events: none;
+  opacity: 0;
+}
+.anim-transform::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(
+    45deg,
+    #ff69b4, #ffd700, #ff69b4, #9370db, #ffd700
+  );
+  background-size: 400% 400%;
+  animation: animTransformBorder 2s ease-out forwards;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+}
+@keyframes animTransform {
+  0%   { opacity: 0; transform: scale(0) rotate(720deg); filter: blur(20px) brightness(3); }
+  30%  { opacity: 1; transform: scale(1.15) rotate(0deg); filter: blur(0) brightness(1.8); }
+  50%  { transform: scale(0.95); filter: brightness(1.3); }
+  70%  { transform: scale(1.03); filter: brightness(1.1); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+}
+@keyframes animTransformGlow {
+  0%   { opacity: 0; transform: scale(0.3); }
+  30%  { opacity: 1; transform: scale(1); }
+  70%  { opacity: 0.5; transform: scale(1.3); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes animTransformBorder {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; background-position: 0% 50%; }
+  70%  { opacity: 0.6; background-position: 100% 50%; }
+  100% { opacity: 0; }
+}
+
+/* --- 13. Dramatic Drop (ドラマチック) --- */
+.anim-dramatic {
+  animation: animDramatic 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-dramatic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 70%,
+    transparent 100%
+  );
+  animation: animDramaticShine 1s ease-in-out 1.2s forwards;
+  pointer-events: none;
+}
+@keyframes animDramatic {
+  0%   { opacity: 0; transform: translateY(-200px) scale(0.6); filter: blur(8px); }
+  40%  { opacity: 1; transform: translateY(10px) scale(1.05); filter: blur(0); }
+  55%  { transform: translateY(-5px) scale(0.98); }
+  70%  { transform: translateY(3px) scale(1.01); }
+  85%  { transform: translateY(-1px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes animDramaticShine {
+  to { left: 200%; }
+}
+
+/* --- 14. Bishoujo Senshi (美少女戦士) --- */
+.anim-bishoujo {
+  animation: animBishoujoCard 5s ease-out forwards;
+  overflow: visible !important;
+  will-change: transform, opacity;
+}
+
+/* ピンク〜ゴールドのグロー（固定shadow、opacityだけアニメーション） */
+.anim-bishoujo::before {
+  content: '';
+  position: absolute;
+  inset: -60px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 105, 180, 0.7) 0%,
+    rgba(255, 215, 0, 0.4) 30%,
+    rgba(200, 100, 255, 0.2) 55%,
+    transparent 75%
+  );
+  animation: animBishoujoGlow1 5s ease-out forwards;
+  pointer-events: none;
+  will-change: transform, opacity;
+  z-index: -1;
+}
+
+/* ブルー〜パープルの回転グロー */
+.anim-bishoujo::after {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 105, 180, 0.6),
+    rgba(255, 215, 0, 0.5),
+    rgba(100, 200, 255, 0.5),
+    rgba(200, 100, 255, 0.5),
+    rgba(255, 180, 220, 0.5),
+    rgba(255, 215, 0, 0.4),
+    rgba(255, 105, 180, 0.6)
+  );
+  animation: animBishoujoGlow2 5s ease-out forwards;
+  pointer-events: none;
+  will-change: transform, opacity;
+  z-index: -1;
+}
+
+/* カード本体: ゆっくり回転 + ズームイン/アウト */
+@keyframes animBishoujoCard {
+  0%   { opacity: 0; transform: scale(0.1) rotateY(0deg); }
+  6%   { opacity: 1; transform: scale(1.5) rotateY(60deg); }
+  14%  { transform: scale(0.5) rotateY(150deg); }
+  22%  { transform: scale(1.8) rotateY(240deg); }
+  30%  { transform: scale(0.6) rotateY(360deg); }
+  40%  { transform: scale(1.5) rotateY(480deg); }
+  50%  { transform: scale(0.7) rotateY(580deg); }
+  62%  { transform: scale(1.3) rotateY(660deg); }
+  74%  { transform: scale(0.9) rotateY(700deg); }
+  85%  { transform: scale(1.08) rotateY(715deg); }
+  93%  { transform: scale(0.98) rotateY(719deg); }
+  100% { opacity: 1; transform: scale(1) rotateY(720deg); }
+}
+
+/* ピンクグロー: 拡大しながら点滅 */
+@keyframes animBishoujoGlow1 {
+  0%   { opacity: 0; transform: scale(0.3); }
+  8%   { opacity: 1; transform: scale(1.2); }
+  16%  { opacity: 0.4; transform: scale(0.8); }
+  24%  { opacity: 1; transform: scale(1.4); }
+  34%  { opacity: 0.5; transform: scale(0.9); }
+  44%  { opacity: 0.9; transform: scale(1.3); }
+  56%  { opacity: 0.4; transform: scale(1.1); }
+  70%  { opacity: 0.6; transform: scale(1.0); }
+  85%  { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* 虹色回転グロー */
+@keyframes animBishoujoGlow2 {
+  0%   { opacity: 0; transform: scale(0.2) rotate(0deg); }
+  10%  { opacity: 0.8; transform: scale(1.0) rotate(60deg); }
+  25%  { opacity: 1; transform: scale(1.5) rotate(150deg); }
+  40%  { opacity: 0.7; transform: scale(1.2) rotate(260deg); }
+  55%  { opacity: 0.9; transform: scale(1.4) rotate(380deg); }
+  70%  { opacity: 0.5; transform: scale(1.1) rotate(500deg); }
+  85%  { opacity: 0.2; transform: scale(0.8) rotate(640deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(720deg); }
+}
+
+/* --- Animation Grid Thumbnails --- */
+.anim-thumb {
+  width: 48px;
+  height: 36px;
+  background: var(--color-bg);
+  border-radius: 4px;
+  margin: 0 auto 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.anim-thumb-inner {
+  width: 28px;
+  height: 20px;
+  background: var(--color-accent-light);
+  border-radius: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Hover micro-animations for grid items */
+.selection-item:hover .anim-thumb-inner {
+  animation: thumbPulse 0.6s ease;
+}
+@keyframes thumbPulse {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.15); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
