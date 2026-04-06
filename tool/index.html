@@ -133,6 +133,20 @@
   <div class="card-preview-group">
     <!-- スティッキープレビュー（左：鳥+タペストリー風） -->
     <div class="card-preview-left-phone">
+      <div class="birds-carry">
+        <div class="bird">
+          <svg viewBox="0 0 40 28" fill="none"><path d="M8 18 Q12 4 20 10 Q28 4 32 14 Q36 8 38 12" stroke="#C5795A" stroke-width="2.5" stroke-linecap="round" fill="none" /><circle cx="34" cy="12" r="2" fill="#C5795A"/></svg>
+        </div>
+        <div class="bird">
+          <svg viewBox="0 0 40 28" fill="none"><path d="M8 16 Q14 6 20 12 Q26 6 32 12 Q36 6 38 10" stroke="#7CB899" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="34" cy="10" r="2" fill="#7CB899"/></svg>
+        </div>
+        <div class="bird">
+          <svg viewBox="0 0 40 28" fill="none"><path d="M6 18 Q12 6 20 12 Q28 6 34 14 Q37 8 39 11" stroke="#90CAF9" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="35" cy="11" r="2" fill="#90CAF9"/></svg>
+        </div>
+        <div class="bird-string"></div>
+        <div class="bird-string"></div>
+        <div class="bird-string"></div>
+      </div>
       <div class="tapestry-frame">
         <div class="phone-frame">
           <div class="phone-notch"></div>
@@ -190,7 +204,19 @@
   <!-- ⑥ ビデオ通話用背景作成 -->
   <div class="zoom-bg-group">
     <div class="zoom-bg-preview-side">
-      <canvas id="live-preview-canvas" width="384" height="216"></canvas>
+      <div class="birds-carry birds-carry--sm">
+        <div class="bird">
+          <svg viewBox="0 0 40 28" fill="none"><path d="M8 18 Q12 4 20 10 Q28 4 32 14 Q36 8 38 12" stroke="#C5795A" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="34" cy="12" r="2" fill="#C5795A"/></svg>
+        </div>
+        <div class="bird">
+          <svg viewBox="0 0 40 28" fill="none"><path d="M8 16 Q14 6 20 12 Q26 6 32 12 Q36 6 38 10" stroke="#7CB899" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="34" cy="10" r="2" fill="#7CB899"/></svg>
+        </div>
+        <div class="bird-string"></div>
+        <div class="bird-string"></div>
+      </div>
+      <div class="tapestry-frame">
+        <canvas id="live-preview-canvas" width="384" height="216" style="width:100%;height:auto;border-radius:4px"></canvas>
+      </div>
       <span class="zoom-preview-label">背景プレビュー</span>
     </div>
 
