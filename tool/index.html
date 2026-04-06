@@ -23,9 +23,17 @@
     <p>QRコードで届く、あなただけのデジタル名刺を作成しましょう</p>
   </header>
 
-  <!-- ============================================ -->
-  <!-- Section 1: Card Image Upload (まず素材を入れる) -->
-  <!-- ============================================ -->
+  <!-- Step Indicator -->
+  <div class="step-indicator">
+    <div class="step-dot active"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+  </div>
+
+  <!-- ① 名刺画像アップロード -->
   <section class="section" id="section-upload">
     <div class="section-card">
       <h2 class="section-title">
@@ -48,66 +56,11 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- Section 2: QR Code Design                    -->
-  <!-- ============================================ -->
-  <section class="section" id="section-qr">
-    <div class="section-card">
-      <h2 class="section-title">
-        <span class="section-number">2</span>
-        QRコードデザイン
-      </h2>
-      <p class="section-desc">形・色を選んでQRコードをカスタマイズ</p>
-
-      <div class="qr-layout">
-        <div class="qr-controls" id="qr-customizer">
-          <!-- JS で生成 -->
-        </div>
-        <div class="qr-sticky-preview">
-          <div class="qr-preview-area" id="qr-preview">
-            <!-- QR プレビューが入る -->
-          </div>
-        </div>
-      </div>
-      <p id="qr-contrast-warning" class="qr-warning"></p>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- Live Preview: 背景+QR合成プレビュー          -->
-  <!-- (この先ずっと画面内に見え続ける)              -->
-  <!-- ============================================ -->
-  <div class="live-preview-bar" id="live-preview-bar">
-    <div class="live-preview-inner">
-      <canvas id="live-preview-canvas" width="384" height="216"></canvas>
-      <span class="live-preview-label">Zoom背景プレビュー</span>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- Section 3: Zoom Background Template          -->
-  <!-- ============================================ -->
-  <section class="section" id="section-zoom-bg">
-    <div class="section-card">
-      <h2 class="section-title">
-        <span class="section-number">3</span>
-        Zoom背景テンプレート
-      </h2>
-      <p class="section-desc">QRコードが配置される背景を選んでください</p>
-
-      <div id="zoom-bg-grid">
-        <!-- JS で生成 -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- Section 4: Link Configuration                -->
-  <!-- ============================================ -->
+  <!-- ② リンク設定 -->
   <section class="section" id="section-link">
     <div class="section-card">
       <h2 class="section-title">
-        <span class="section-number">4</span>
+        <span class="section-number">2</span>
         リンク設定
       </h2>
       <p class="section-desc">名刺ページにWebサイトへのリンクを表示できます</p>
@@ -126,13 +79,34 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- Section 5: Animation Selection               -->
-  <!-- ============================================ -->
+  <!-- ③ QRコードデザイン -->
+  <section class="section" id="section-qr">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">3</span>
+        QRコードデザイン
+      </h2>
+      <p class="section-desc">形・色を選んでQRコードをカスタマイズ</p>
+
+      <div class="qr-layout">
+        <div class="qr-controls" id="qr-customizer">
+          <!-- JS で生成 -->
+        </div>
+        <div class="qr-sticky-preview">
+          <div class="qr-preview-area" id="qr-preview">
+            <!-- QR プレビューが入る -->
+          </div>
+        </div>
+      </div>
+      <p id="qr-contrast-warning" class="qr-warning"></p>
+    </div>
+  </section>
+
+  <!-- ④ カード登場アニメーション -->
   <section class="section" id="section-animation">
     <div class="section-card">
       <h2 class="section-title">
-        <span class="section-number">5</span>
+        <span class="section-number">4</span>
         カード登場アニメーション
       </h2>
       <p class="section-desc">名刺が画面に現れるときの演出を選んでください</p>
@@ -154,13 +128,11 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- Section 6: Card Page Background              -->
-  <!-- ============================================ -->
+  <!-- ⑤ 名刺ページの背景 -->
   <section class="section" id="section-card-bg">
     <div class="section-card">
       <h2 class="section-title">
-        <span class="section-number">6</span>
+        <span class="section-number">5</span>
         名刺ページの背景
       </h2>
       <p class="section-desc">QRコードで開いたときのページ背景色を選んでください</p>
@@ -170,6 +142,39 @@
       </div>
     </div>
   </section>
+
+  <!-- ⑥ Zoom背景テンプレート + QR位置設定 -->
+  <section class="section" id="section-zoom-bg">
+    <div class="section-card">
+      <h2 class="section-title">
+        <span class="section-number">6</span>
+        Zoom背景 &amp; QRコードの配置
+      </h2>
+      <p class="section-desc">背景を選んで、QRコードの位置をドラッグで調整してください</p>
+
+      <div id="zoom-bg-grid">
+        <!-- JS で生成 -->
+      </div>
+
+      <!-- QR位置設定: ドラッグで配置 -->
+      <h3 class="qr-position-title">QRコードの位置</h3>
+      <p class="section-desc">プレビュー上のQRコードをドラッグして好きな位置に動かせます</p>
+      <div class="qr-position-canvas-wrap">
+        <canvas id="qr-position-canvas" width="576" height="324"></canvas>
+        <div class="qr-position-drag" id="qr-drag-handle">
+          <div class="qr-drag-icon">QR</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ライブプレビュー (スティッキー) -->
+  <div class="live-preview-bar" id="live-preview-bar">
+    <div class="live-preview-inner">
+      <canvas id="live-preview-canvas" width="384" height="216"></canvas>
+      <span class="live-preview-label">Zoom背景プレビュー</span>
+    </div>
+  </div>
 
   <!-- Navigation -->
   <div class="nav-footer">

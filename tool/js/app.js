@@ -6,6 +6,7 @@ import { initImageUploader } from './image-uploader.js';
 import { initAnimationPreviewer } from './animation-previewer.js';
 import { initCardBackgroundSelector, initZoomBackgroundSelector, ZOOM_BACKGROUNDS } from './background-selector.js';
 import { initQRGenerator } from './qr-generator.js';
+import { initQRPosition } from './qr-position.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initStepIndicator();
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardBackgroundSelector();
   initNavigation();
   initMobileQRPreview();
+  initQRPosition();
   initLivePreview();
   restoreState();
 });
@@ -166,10 +168,11 @@ function updateLivePreview() {
     drawBokeh(ctx, w, h);
   }
 
-  // QRコード配置エリア（右下）
+  // QRコード配置（ユーザー設定位置）
   const qrSize = Math.round(w * 0.15);
-  const qrX = w - qrSize - Math.round(w * 0.04);
-  const qrY = h - qrSize - Math.round(h * 0.08);
+  const qrPosition = state.qrPosition || { x: 82, y: 78 };
+  const qrX = (qrPosition.x / 100) * w - qrSize / 2;
+  const qrY = (qrPosition.y / 100) * h - qrSize / 2;
 
   // QR白背景
   ctx.fillStyle = 'rgba(255,255,255,0.9)';

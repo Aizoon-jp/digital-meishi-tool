@@ -13,6 +13,7 @@ const defaultState = {
   linkUrl: '',
   animationType: 'slide-down',
   cardBackground: 'cream',
+  qrPosition: { x: 82, y: 78 },
 };
 
 export function loadState() {
