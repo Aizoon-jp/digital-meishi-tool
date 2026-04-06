@@ -1,30 +1,65 @@
 /* ===========================
    Design System & Base Styles
+   Yoshi's Island Craft Theme
    =========================== */
 
 :root {
-  --color-bg: #1a1f2e;
-  --color-bg-card: #232839;
-  --color-bg-input: #2a2f42;
-  --color-bg-hover: #2f3550;
-  --color-accent: #c5795a;
-  --color-accent-light: rgba(197, 121, 90, 0.4);
-  --color-accent-glow: rgba(197, 121, 90, 0.15);
-  --color-text: #e8e6e3;
-  --color-text-muted: rgba(232, 230, 227, 0.5);
-  --color-text-subtle: rgba(232, 230, 227, 0.3);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-active: rgba(197, 121, 90, 0.6);
-  --color-success: #5a9e6f;
-  --color-error: #c55a5a;
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Noto Serif JP', serif;
+  /* 画用紙・クラフト紙 */
+  --color-bg: #FFF8F0;
+  --color-bg-card: #FFFFFF;
+  --color-bg-input: #FFF5EB;
+  --color-bg-hover: #FFECD2;
+  --color-bg-dark: #F5E6D3;
+
+  /* テラコッタ（アクセント） */
+  --color-accent: #C5795A;
+  --color-accent-light: rgba(197, 121, 90, 0.25);
+  --color-accent-glow: rgba(197, 121, 90, 0.1);
+
+  /* クラフトカラー */
+  --color-craft-brown: #8D6E63;
+  --color-craft-border: #BCAAA4;
+  --color-craft-shadow: rgba(74, 55, 40, 0.12);
+
+  /* パステル */
+  --color-pastel-green: #A8D5BA;
+  --color-pastel-blue: #90CAF9;
+  --color-pastel-pink: #F8BBD0;
+  --color-pastel-yellow: #FFF9C4;
+  --color-pastel-purple: #D1C4E9;
+  --color-pastel-peach: #FFCCBC;
+
+  /* テキスト */
+  --color-text: #4A3728;
+  --color-text-muted: #8D6E63;
+  --color-text-subtle: #BCAAA4;
+
+  /* ボーダー */
+  --color-border: #D7CCC8;
+  --color-border-active: #C5795A;
+
+  /* ステータス */
+  --color-success: #66BB6A;
+  --color-error: #EF5350;
+
+  /* フォント */
+  --font-display: 'Zen Kurenaido', sans-serif;
+  --font-body: 'Klee One', 'Yomogi', cursive;
+  --font-accent: 'Caveat', cursive;
+
+  /* 手描き風ボーダー */
+  --radius-hand: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --radius-hand-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
   --radius: 12px;
   --radius-sm: 8px;
   --radius-lg: 16px;
-  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 20px rgba(197, 121, 90, 0.15);
+
+  /* シャドウ */
+  --shadow-card: 3px 4px 0px #D7CCC8;
+  --shadow-card-hover: 4px 6px 0px #BCAAA4;
+  --shadow-sm: 2px 2px 0px #E0D6CA;
+  --shadow-glow: 0 0 12px rgba(197, 121, 90, 0.2);
+
   --transition: 0.3s ease;
 }
 
@@ -44,15 +79,17 @@ body {
   background-color: var(--color-bg);
   font-family: var(--font-body);
   color: var(--color-text);
-  line-height: 1.7;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  /* 画用紙テクスチャ */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0.02em;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-text);
 }
 
 a {
@@ -62,7 +99,7 @@ a {
 }
 
 a:hover {
-  color: #d4896a;
+  color: #D4896A;
 }
 
 img {
@@ -71,9 +108,18 @@ img {
   display: block;
 }
 
-/* Scrollbar */
+/* SVG Filters for hand-drawn effects */
+body::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Scrollbar - craft style */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -81,6 +127,6 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 3px;
+  background: var(--color-craft-border);
+  border-radius: 4px;
 }

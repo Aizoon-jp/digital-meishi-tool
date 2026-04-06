@@ -2,6 +2,54 @@
    Tool Page Specific Styles
    =========================== */
 
+/* --- Live Preview Bar (背景+QR合成プレビュー) --- */
+.live-preview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-bg-card);
+  border-bottom: 2px solid var(--color-border);
+  box-shadow: 0 4px 12px var(--color-craft-shadow);
+  padding: 0.5rem 1rem;
+  display: none;
+}
+
+.live-preview-bar.visible {
+  display: block;
+}
+
+.live-preview-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.live-preview-inner canvas {
+  width: 200px;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.live-preview-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 600px) {
+  .live-preview-inner canvas {
+    width: 140px;
+  }
+
+  .live-preview-label {
+    font-size: 0.7rem;
+  }
+}
+
 /* --- Page Flow Indicator --- */
 .step-indicator {
   display: flex;
@@ -208,7 +256,33 @@
   max-width: 220px;
 }
 
-/* --- Background Template Section --- */
+/* --- Zoom Background Template Section --- */
+.zoom-bg-category-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  margin: 1rem 0 0.4rem;
+  padding-left: 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.zoom-bg-category-label:first-child {
+  margin-top: 0;
+}
+
+.zoom-bg-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.bg-template-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
 .bg-template-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -285,19 +359,39 @@
 }
 
 /* --- Card Background Section --- */
+.card-bg-category-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin: 0.75rem 0 0.3rem;
+  letter-spacing: 0.05em;
+}
+
+.card-bg-category-label:first-child {
+  margin-top: 0;
+}
+
+.card-bg-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
 .card-bg-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-bg-item {
-  aspect-ratio: 9 / 16;
-  border-radius: var(--radius-sm);
-  border: 2px solid transparent;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-border);
   cursor: pointer;
   transition: all var(--transition);
   position: relative;
+  box-shadow: var(--shadow-sm);
 }
 
 .card-bg-item:hover {
@@ -310,18 +404,17 @@
 }
 
 .card-bg-item.active::after {
-  content: '';
+  content: '✓';
   position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 16px;
-  height: 16px;
-  background: var(--color-accent);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0,0,0,0.25);
   border-radius: 50%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-  background-size: 10px;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 /* --- Animation Selection Grid --- */

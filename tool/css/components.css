@@ -1,17 +1,18 @@
 /* ===========================
-   Shared Components
+   Shared Components - Craft Theme
    =========================== */
 
 /* --- Header --- */
 .site-header {
   text-align: center;
-  padding: 3rem 1rem 2rem;
+  padding: 2.5rem 1rem 1.5rem;
 }
 
 .site-header h1 {
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   color: var(--color-text);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.05em;
 }
 
 .site-header p {
@@ -24,42 +25,49 @@
 /* --- Section --- */
 .section {
   max-width: 720px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.5rem;
   padding: 0 1.5rem;
 }
 
 .section-card {
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border: 2.5px solid var(--color-craft-border);
+  border-radius: var(--radius-hand);
   padding: 2rem;
-  transition: border-color var(--transition);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition);
+  position: relative;
+  /* 画用紙テクスチャ */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 .section-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-hand-alt);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .section-number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: var(--color-accent);
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
+  width: 32px;
+  height: 32px;
+  background: var(--color-pastel-peach);
+  color: var(--color-accent);
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  font-weight: 700;
   border-radius: 50%;
   margin-right: 0.75rem;
+  border: 2px solid var(--color-accent);
+  box-shadow: var(--shadow-sm);
 }
 
 .section-title {
   display: flex;
   align-items: center;
-  font-size: 1.15rem;
-  margin-bottom: 1.25rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   color: var(--color-text);
 }
 
@@ -67,6 +75,30 @@
   color: var(--color-text-muted);
   font-size: 0.85rem;
   margin-bottom: 1.25rem;
+}
+
+/* --- Masking Tape Decoration --- */
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 80px;
+  height: 22px;
+  background: var(--color-pastel-green);
+  opacity: 0.7;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.section:nth-child(odd) .section-card::before {
+  background: var(--color-pastel-blue);
+  transform: translateX(-50%) rotate(1deg);
+}
+
+.section:nth-child(3n) .section-card::before {
+  background: var(--color-pastel-pink);
+  transform: translateX(-50%) rotate(-0.5deg);
 }
 
 /* --- Selection Grid --- */
@@ -79,43 +111,51 @@
 .selection-item {
   position: relative;
   background: var(--color-bg-input);
-  border: 2px solid transparent;
-  border-radius: var(--radius);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-hand);
   padding: 1rem;
   cursor: pointer;
   transition: all var(--transition);
   text-align: center;
+  box-shadow: var(--shadow-sm);
 }
 
 .selection-item:hover {
   background: var(--color-bg-hover);
-  border-color: var(--color-border);
+  border-color: var(--color-craft-brown);
+  border-radius: var(--radius-hand-alt);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
 }
 
 .selection-item.active {
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-glow);
+  background: var(--color-accent-glow);
+  box-shadow: var(--shadow-glow), var(--shadow-card);
 }
 
 .selection-item.active::after {
-  content: '';
+  content: '✓';
   position: absolute;
-  top: 8px;
+  top: 6px;
   right: 8px;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background: var(--color-accent);
+  color: #fff;
   border-radius: 50%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
-  background-size: 12px;
-  background-repeat: no-repeat;
-  background-position: center;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .selection-label {
   font-size: 0.8rem;
   color: var(--color-text-muted);
   margin-top: 0.5rem;
+  font-family: var(--font-display);
 }
 
 /* --- Buttons --- */
@@ -127,10 +167,9 @@
   padding: 0.85rem 2rem;
   font-family: var(--font-display);
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.05em;
   border: none;
-  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition);
 }
@@ -138,27 +177,41 @@
 .btn-primary {
   background: var(--color-accent);
   color: #fff;
+  border: 2.5px solid #A0624A;
+  border-radius: var(--radius-hand);
+  box-shadow: 3px 3px 0px #D7CCC8;
 }
 
 .btn-primary:hover {
-  background: #d4896a;
-  box-shadow: 0 4px 20px rgba(197, 121, 90, 0.3);
+  background: #D4896A;
+  transform: translateY(-2px);
+  box-shadow: 4px 5px 0px #BCAAA4;
+  border-radius: var(--radius-hand-alt);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0px #D7CCC8;
 }
 
 .btn-primary:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
 }
 
 .btn-secondary {
-  background: transparent;
+  background: var(--color-bg-input);
   color: var(--color-accent);
-  border: 1px solid var(--color-accent-light);
+  border: 2px solid var(--color-accent-light);
+  border-radius: var(--radius-hand);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
-  background: var(--color-accent-glow);
+  background: var(--color-bg-hover);
   border-color: var(--color-accent);
+  border-radius: var(--radius-hand-alt);
 }
 
 .btn-full {
@@ -170,17 +223,19 @@
   width: 100%;
   padding: 0.75rem 1rem;
   background: var(--color-bg-input);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-hand);
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 0.95rem;
   transition: border-color var(--transition);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .input-field:focus {
   outline: none;
   border-color: var(--color-accent);
+  border-radius: var(--radius-hand-alt);
 }
 
 .input-field::placeholder {
@@ -199,8 +254,8 @@
   width: 48px;
   height: 26px;
   appearance: none;
-  background: var(--color-bg-input);
-  border: 1px solid var(--color-border);
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-border);
   border-radius: 13px;
   cursor: pointer;
   transition: background var(--transition);
@@ -211,16 +266,16 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 20px;
-  height: 20px;
-  background: var(--color-text-muted);
+  width: 18px;
+  height: 18px;
+  background: var(--color-craft-border);
   border-radius: 50%;
   transition: all var(--transition);
 }
 
 .toggle:checked {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+  background: var(--color-pastel-green);
+  border-color: var(--color-pastel-green);
 }
 
 .toggle:checked::after {
@@ -235,23 +290,25 @@
 
 /* --- Upload Area --- */
 .upload-area {
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius);
+  border: 2.5px dashed var(--color-craft-border);
+  border-radius: var(--radius-hand);
   padding: 2.5rem 1.5rem;
   text-align: center;
   cursor: pointer;
   transition: all var(--transition);
+  background: var(--color-bg-input);
 }
 
 .upload-area:hover,
 .upload-area.dragover {
-  border-color: var(--color-accent-light);
-  background: var(--color-accent-glow);
+  border-color: var(--color-accent);
+  background: var(--color-bg-hover);
+  border-radius: var(--radius-hand-alt);
 }
 
 .upload-area.has-file {
   border-style: solid;
-  border-color: var(--color-accent-light);
+  border-color: var(--color-pastel-green);
   padding: 1rem;
 }
 
@@ -259,7 +316,7 @@
   width: 48px;
   height: 48px;
   margin: 0 auto 1rem;
-  opacity: 0.4;
+  color: var(--color-craft-border);
 }
 
 .upload-text {
@@ -282,12 +339,14 @@
   margin: 0 auto;
   border-radius: var(--radius-sm);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
 /* --- Preview Card (for animation preview) --- */
 .preview-container {
-  background: #111520;
-  border-radius: var(--radius);
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-hand);
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -295,7 +354,6 @@
   min-height: 280px;
   margin-top: 1rem;
   overflow: visible;
-  border: 1px solid var(--color-border);
   position: relative;
 }
 
@@ -315,7 +373,7 @@
 /* --- Footer Navigation --- */
 .nav-footer {
   max-width: 720px;
-  margin: 2rem auto 4rem;
+  margin: 1.5rem auto 4rem;
   padding: 0 1.5rem;
   display: flex;
   justify-content: flex-end;
@@ -332,7 +390,7 @@
   }
 
   .site-header {
-    padding: 2rem 1rem 1.5rem;
+    padding: 2rem 1rem 1rem;
   }
 
   .site-header h1 {

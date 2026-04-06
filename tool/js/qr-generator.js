@@ -206,6 +206,7 @@ function bindColorPickers() {
 
 function save() {
   saveState({ qrDesign: { ...qrState } });
+  if (window._updateLivePreview) window._updateLivePreview();
 }
 
 function updateQRPreview() {

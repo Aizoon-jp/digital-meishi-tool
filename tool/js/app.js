@@ -4,19 +4,20 @@
 import { loadState, saveState } from './state-manager.js';
 import { initImageUploader } from './image-uploader.js';
 import { initAnimationPreviewer } from './animation-previewer.js';
-import { initCardBackgroundSelector, initZoomBackgroundSelector } from './background-selector.js';
+import { initCardBackgroundSelector, initZoomBackgroundSelector, ZOOM_BACKGROUNDS } from './background-selector.js';
 import { initQRGenerator } from './qr-generator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initStepIndicator();
+  initImageUploader();
   initQRGenerator();
   initZoomBackgroundSelector();
-  initImageUploader();
   initLinkConfig();
   initAnimationPreviewer();
   initCardBackgroundSelector();
   initNavigation();
   initMobileQRPreview();
+  initLivePreview();
   restoreState();
 });
 
@@ -105,6 +106,160 @@ function initMobileQRPreview() {
   });
 }
 
+// --- Live Preview: 背景+QR合成プレビュー ---
+function initLivePreview() {
+  const bar = document.getElementById('live-preview-bar');
+  const canvas = document.getElementById('live-preview-canvas');
+  if (!bar || !canvas) return;
+
+  // QRセクションの下からライブプレビューを表示
+  const qrSection = document.getElementById('section-qr');
+  if (qrSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // QRセクションが画面外に出たら（下にスクロールしたら）表示
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          bar.classList.add('visible');
+        } else {
+          bar.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0 });
+
+    observer.observe(qrSection);
+  }
+
+  // 初回描画
+  updateLivePreview();
+
+  // 背景やQRが変わったら再描画（MutationObserverでsessionStorage変更を検知）
+  const origSave = saveState;
+  window._updateLivePreview = updateLivePreview;
+}
+
+function updateLivePreview() {
+  const canvas = document.getElementById('live-preview-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+  const state = loadState();
+
+  // 背景描画
+  const bgId = state.backgroundTemplate || 'bright-future';
+  const bg = ZOOM_BACKGROUNDS.find(b => b.id === bgId);
+
+  // グラデーション解析・描画
+  ctx.clearRect(0, 0, w, h);
+
+  if (bg && bg.gradient) {
+    // CSSグラデーションをCanvas用に簡易変換
+    drawGradientBg(ctx, w, h, bg);
+  } else {
+    ctx.fillStyle = '#e8ecf1';
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  // ボケ玉エフェクト
+  if (bg && bg.bokeh) {
+    drawBokeh(ctx, w, h);
+  }
+
+  // QRコード配置エリア（右下）
+  const qrSize = Math.round(w * 0.15);
+  const qrX = w - qrSize - Math.round(w * 0.04);
+  const qrY = h - qrSize - Math.round(h * 0.08);
+
+  // QR白背景
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.beginPath();
+  ctx.roundRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8, 4);
+  ctx.fill();
+
+  // QRっぽいパターン描画
+  const qd = state.qrDesign || {};
+  ctx.fillStyle = qd.dotColor || '#000000';
+
+  // ファインダーパターン（3つの角）
+  const fp = Math.round(qrSize * 0.25);
+  drawFinderPattern(ctx, qrX + 2, qrY + 2, fp, qd.dotColor || '#000');
+  drawFinderPattern(ctx, qrX + qrSize - fp - 2, qrY + 2, fp, qd.cornerColor || '#000');
+  drawFinderPattern(ctx, qrX + 2, qrY + qrSize - fp - 2, fp, qd.cornerColor || '#000');
+
+  // データドット
+  const dotSize = 2;
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      if (Math.sin(r * 7 + c * 13) > -0.3) {
+        const dx = qrX + fp + 4 + c * (qrSize - fp * 2 - 8) / 8;
+        const dy = qrY + fp + 4 + r * (qrSize - fp * 2 - 8) / 8;
+        ctx.fillStyle = qd.dotColor || '#000';
+        ctx.fillRect(dx, dy, dotSize, dotSize);
+      }
+    }
+  }
+}
+
+function drawFinderPattern(ctx, x, y, size, color) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(x, y, size, size);
+  ctx.fillStyle = color;
+  const inner = Math.round(size * 0.35);
+  const offset = Math.round((size - inner) / 2);
+  ctx.fillRect(x + offset, y + offset, inner, inner);
+}
+
+function drawGradientBg(ctx, w, h, bg) {
+  // 簡易的にCSSグラデーションの色を抽出して描画
+  const colorMatch = bg.gradient.match(/#[0-9a-fA-F]{6}/g);
+  if (colorMatch && colorMatch.length >= 2) {
+    const grad = ctx.createLinearGradient(0, 0, w, h);
+    colorMatch.forEach((c, i) => {
+      grad.addColorStop(i / (colorMatch.length - 1), c);
+    });
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+  } else {
+    ctx.fillStyle = '#e8ecf1';
+    ctx.fillRect(0, 0, w, h);
+  }
+}
+
+function drawBokeh(ctx, w, h) {
+  const circles = [
+    { x: 0.15, y: 0.2, r: 20, a: 0.15 },
+    { x: 0.75, y: 0.15, r: 12, a: 0.12 },
+    { x: 0.45, y: 0.6, r: 25, a: 0.1 },
+    { x: 0.85, y: 0.45, r: 15, a: 0.12 },
+    { x: 0.25, y: 0.8, r: 18, a: 0.08 },
+    { x: 0.6, y: 0.3, r: 10, a: 0.15 },
+  ];
+  circles.forEach(c => {
+    const grad = ctx.createRadialGradient(
+      w * c.x, h * c.y, 0, w * c.x, h * c.y, c.r
+    );
+    grad.addColorStop(0, `rgba(255,255,255,${c.a})`);
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(w * c.x, h * c.y, c.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+// saveStateをラップしてライブプレビューを自動更新
+const _originalSaveState = saveState;
+const patchedSaveState = (updates) => {
+  const result = _originalSaveState(updates);
+  updateLivePreview();
+  return result;
+};
+
+// グローバルに更新関数を公開（他のモジュールから呼べるように）
+window._updateLivePreview = updateLivePreview;
+
 function restoreState() {
   const state = loadState();
 
@@ -138,4 +293,7 @@ function restoreState() {
     const previewImg = document.getElementById('anim-preview-img');
     if (previewImg) previewImg.src = state.cardImage;
   }
+
+  // 初回ライブプレビュー更新
+  updateLivePreview();
 }

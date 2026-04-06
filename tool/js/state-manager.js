@@ -6,13 +6,13 @@ const STATE_KEY = 'dijica_tool_state';
 
 const defaultState = {
   qrDesign: 'simple',
-  backgroundTemplate: 'minimal',
+  backgroundTemplate: 'bright-future',
   cardImage: null,
   cardImageName: null,
   linkEnabled: false,
   linkUrl: '',
   animationType: 'slide-down',
-  cardBackground: 'navy',
+  cardBackground: 'cream',
 };
 
 export function loadState() {

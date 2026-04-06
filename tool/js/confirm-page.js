@@ -3,26 +3,19 @@
  */
 import { loadState } from './state-manager.js';
 import { ANIMATIONS, playAnimation } from './animation-previewer.js';
+import { CARD_BACKGROUNDS, ZOOM_BACKGROUNDS } from './background-selector.js';
 
 const DOT_SHAPE_NAMES = {
   square: 'スクエア', rounded: 'ラウンド', dots: 'ドット',
   classy: 'クラシック', 'classy-rounded': 'クラシックR', 'extra-rounded': 'エクストラR',
 };
 
-const BG_NAMES = {
-  minimal: 'ミニマル', gradient: 'グラデーション', corporate: 'コーポレート',
-};
-
-const CARD_BG_NAMES = {
-  navy: 'ネイビー', charcoal: 'チャコール', midnight: 'ミッドナイト',
-  wine: 'ワイン', forest: 'フォレスト', slate: 'スレート',
-  'warm-gray': 'ウォームグレー', ocean: 'オーシャン',
-};
-
 const CARD_BG_COLORS = {
   navy: '#1a1f2e', charcoal: '#1e1e1e', midnight: '#0d1117',
-  wine: '#2a1520', forest: '#152a1a', slate: '#2d3748',
-  'warm-gray': '#292524', ocean: '#0f2027',
+  slate: '#2d3748', white: '#f8f9fa', cream: '#FFF8F0',
+  'soft-gray': '#ecf0f1', beige: '#f5e6d3', sage: '#d4ddd0',
+  'warm-sand': '#e8d5b7', rose: '#f4e2d8', lavender: '#e8dff5',
+  mint: '#e0f2f1', sky: '#e3f2fd',
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,8 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     setText('sum-qr', 'カスタム');
   }
-  setText('sum-bg', BG_NAMES[state.backgroundTemplate] || state.backgroundTemplate);
-  setText('sum-card-bg', CARD_BG_NAMES[state.cardBackground] || state.cardBackground);
+  var zoomBg = ZOOM_BACKGROUNDS.find(function(b) { return b.id === state.backgroundTemplate; });
+  setText('sum-bg', zoomBg ? zoomBg.name : state.backgroundTemplate);
+  var cardBg = CARD_BACKGROUNDS.find(function(b) { return b.id === state.cardBackground; });
+  setText('sum-card-bg', cardBg ? cardBg.name : state.cardBackground);
   setText('sum-link', state.linkEnabled ? state.linkUrl || '（URL未入力）' : 'なし');
 
   const anim = ANIMATIONS.find(a => a.id === state.animationType);
