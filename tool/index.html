@@ -131,80 +131,21 @@
 
   <!-- ④⑤ アニメーション+背景（プレビュー共有） -->
   <div class="card-preview-group">
-    <!-- スティッキープレビュー（左：鳥+タペストリー風） -->
+    <!-- スティッキープレビュー（左：天使タペストリー画像） -->
     <div class="card-preview-left-phone">
-      <div class="angels-carry">
-        <div class="angel">
-          <svg viewBox="0 0 44 52" fill="none">
-            <!-- 光輪 -->
-            <ellipse cx="22" cy="6" rx="6" ry="3" stroke="#FFD700" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <!-- 頭 -->
-            <circle cx="22" cy="14" r="6" fill="#FFECD2" stroke="#C5795A" stroke-width="2"/>
-            <!-- ほっぺ -->
-            <circle cx="18" cy="15" r="1.5" fill="#F8BBD0" opacity="0.6"/>
-            <circle cx="26" cy="15" r="1.5" fill="#F8BBD0" opacity="0.6"/>
-            <!-- 目 -->
-            <circle cx="20" cy="13" r="1" fill="#5D4037"/>
-            <circle cx="24" cy="13" r="1" fill="#5D4037"/>
-            <!-- 口 -->
-            <path d="M20.5 16.5 Q22 18 23.5 16.5" stroke="#C5795A" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <!-- 体 -->
-            <path d="M16 20 Q22 22 28 20 L26 36 Q22 38 18 36 Z" fill="#E8DFF5" stroke="#D1C4E9" stroke-width="1.5"/>
-            <!-- 左翼 -->
-            <path d="M14 18 Q6 14 4 20 Q6 22 10 20 Q8 24 6 28 Q10 26 14 24" fill="#FFF8F0" stroke="#BCAAA4" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- 右翼 -->
-            <path d="M30 18 Q38 14 40 20 Q38 22 34 20 Q36 24 38 28 Q34 26 30 24" fill="#FFF8F0" stroke="#BCAAA4" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- 手（紐を持ってる） -->
-            <circle cx="18" cy="32" r="2" fill="#FFECD2" stroke="#C5795A" stroke-width="1.5"/>
-            <!-- 紐 -->
-            <line x1="18" y1="34" x2="18" y2="50" stroke="#BCAAA4" stroke-width="1.5" stroke-dasharray="2 2"/>
-          </svg>
-        </div>
-        <div class="angel">
-          <svg viewBox="0 0 44 52" fill="none">
-            <ellipse cx="22" cy="6" rx="6" ry="3" stroke="#FFD700" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <circle cx="22" cy="14" r="6" fill="#FFECD2" stroke="#7CB899" stroke-width="2"/>
-            <circle cx="18" cy="15" r="1.5" fill="#F8BBD0" opacity="0.6"/>
-            <circle cx="26" cy="15" r="1.5" fill="#F8BBD0" opacity="0.6"/>
-            <circle cx="20" cy="13" r="1" fill="#5D4037"/>
-            <circle cx="24" cy="13" r="1" fill="#5D4037"/>
-            <path d="M20.5 16.5 Q22 18 23.5 16.5" stroke="#7CB899" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <path d="M16 20 Q22 22 28 20 L26 36 Q22 38 18 36 Z" fill="#C8E6C9" stroke="#A5D6A7" stroke-width="1.5"/>
-            <path d="M14 18 Q6 14 4 20 Q6 22 10 20 Q8 24 6 28 Q10 26 14 24" fill="#FFF8F0" stroke="#BCAAA4" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M30 18 Q38 14 40 20 Q38 22 34 20 Q36 24 38 28 Q34 26 30 24" fill="#FFF8F0" stroke="#BCAAA4" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="26" cy="32" r="2" fill="#FFECD2" stroke="#7CB899" stroke-width="1.5"/>
-            <line x1="26" y1="34" x2="26" y2="50" stroke="#BCAAA4" stroke-width="1.5" stroke-dasharray="2 2"/>
-          </svg>
-        </div>
-        <div class="angel-string"></div>
-        <div class="angel-string"></div>
-      </div>
-      <div class="tapestry-wrap">
-        <div class="tapestry-frame">
-          <div class="tapestry-pole-end-l"></div>
-          <div class="tapestry-pole-end-r"></div>
+      <div class="tapestry-img-wrap">
+        <img src="assets/tapestry-frame.jpg" alt="" class="tapestry-bg-img">
+        <div class="tapestry-phone-slot">
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen" id="anim-preview">
-          <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
-            <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
-          </div>
-          <div class="preview-links" id="preview-links">
-            <!-- JSで生成 -->
-          </div>
-        </div>
-      </div>
-        </div>
-        <div class="tapestry-bottom">
-          <div class="tapestry-triangle"></div>
-          <div class="tapestry-fringe">
-            <span style="height:18px;background:#C5795A;--delay:0s;--duration:2.8s"></span>
-            <span style="height:24px;background:#A8D5BA;--delay:0.1s;--duration:3.2s"></span>
-            <span style="height:20px;background:#90CAF9;--delay:0.2s;--duration:2.6s"></span>
-            <span style="height:26px;background:#F8BBD0;--delay:0.15s;--duration:3s"></span>
-            <span style="height:22px;background:#D1C4E9;--delay:0.25s;--duration:2.9s"></span>
-            <span style="height:18px;background:#FFCCBC;--delay:0.05s;--duration:3.1s"></span>
-            <span style="height:24px;background:#C5795A;--delay:0.2s;--duration:2.7s"></span>
+              <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+                <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+              </div>
+              <div class="preview-links" id="preview-links">
+                <!-- JSで生成 -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -252,36 +193,10 @@
   <!-- ⑥ ビデオ通話用背景作成 -->
   <div class="zoom-bg-group">
     <div class="zoom-bg-preview-side">
-      <div class="angels-carry angels-carry--sm">
-        <div class="angel">
-          <svg viewBox="0 0 44 52" fill="none">
-            <ellipse cx="22" cy="6" rx="5" ry="2.5" stroke="#FFD700" stroke-width="1.5" fill="none"/>
-            <circle cx="22" cy="13" r="5" fill="#FFECD2" stroke="#90CAF9" stroke-width="1.5"/>
-            <circle cx="20" cy="12" r="0.8" fill="#5D4037"/>
-            <circle cx="24" cy="12" r="0.8" fill="#5D4037"/>
-            <path d="M16 18 Q22 20 28 18 L26 32 Q22 34 18 32 Z" fill="#B3E5FC" stroke="#90CAF9" stroke-width="1"/>
-            <path d="M14 16 Q8 13 6 18 Q8 20 12 18 Q10 22 8 25 Q12 23 14 21" fill="#FFF8F0" stroke="#BCAAA4" stroke-width="1" stroke-linecap="round"/>
-            <path d="M30 16 Q36 13 38 18 Q36 20 32 18 Q34 22 36 25 Q32 23 30 21" fill="#FFF8F0" stroke="#BCAAA4" stroke-width="1" stroke-linecap="round"/>
-            <line x1="22" y1="30" x2="22" y2="50" stroke="#BCAAA4" stroke-width="1.5" stroke-dasharray="2 2"/>
-          </svg>
-        </div>
-        <div class="angel-string" style="left:50%;top:42px;height:10px"></div>
-      </div>
-      <div class="tapestry-wrap">
-        <div class="tapestry-frame">
-          <div class="tapestry-pole-end-l"></div>
-          <div class="tapestry-pole-end-r"></div>
-          <canvas id="live-preview-canvas" width="384" height="216" style="width:100%;height:auto;border-radius:4px"></canvas>
-        </div>
-        <div class="tapestry-bottom">
-          <div class="tapestry-triangle"></div>
-          <div class="tapestry-fringe">
-            <span style="height:14px;background:#A8D5BA;--delay:0s;--duration:3s"></span>
-            <span style="height:18px;background:#C5795A;--delay:0.1s;--duration:2.8s"></span>
-            <span style="height:16px;background:#90CAF9;--delay:0.15s;--duration:3.2s"></span>
-            <span style="height:20px;background:#D1C4E9;--delay:0.2s;--duration:2.9s"></span>
-            <span style="height:14px;background:#F8BBD0;--delay:0.05s;--duration:3.1s"></span>
-          </div>
+      <div class="tapestry-img-wrap tapestry-img-wrap--sm">
+        <img src="assets/tapestry-frame.jpg" alt="" class="tapestry-bg-img">
+        <div class="tapestry-phone-slot tapestry-canvas-slot">
+          <canvas id="live-preview-canvas" width="384" height="216"></canvas>
         </div>
       </div>
       <span class="zoom-preview-label">背景プレビュー</span>
