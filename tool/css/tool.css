@@ -429,6 +429,48 @@
   top: 1rem;
 }
 
+/* ロケットフレーム */
+.rocket-frame-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.rocket-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* QRプレビューをロケットの白パネル部分に配置 */
+.rocket-qr-slot {
+  position: absolute;
+  top: 40%;
+  left: 22%;
+  width: 38%;
+  height: 28%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rocket-qr-slot .qr-preview-area {
+  padding: 0;
+  min-height: auto;
+  background: transparent;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rocket-qr-slot .qr-preview-area canvas,
+.rocket-qr-slot .qr-preview-area svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .qr-sticky-preview .qr-preview-area {
   padding: 1rem;
   min-height: auto;
