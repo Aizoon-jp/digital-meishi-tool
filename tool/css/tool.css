@@ -755,7 +755,7 @@
 /* --- Card Preview Group (④⑤ shared sticky preview) --- */
 .card-preview-group {
   max-width: 780px;
-  margin: 0 auto;
+  margin: 2rem auto 0;
   padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -873,47 +873,42 @@
 .tapestry-pole-end-l { left: -12px; }
 .tapestry-pole-end-r { right: -12px; }
 
-/* タペストリー下部のフリンジ（長め+太め） */
-.tapestry-frame::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  left: 3%;
-  right: 3%;
-  height: 20px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-pastel-peach) 0px,
-    var(--color-pastel-peach) 3px,
-    transparent 3px,
-    transparent 4px,
-    var(--color-pastel-green) 4px,
-    var(--color-pastel-green) 7px,
-    transparent 7px,
-    transparent 8px,
-    var(--color-pastel-blue) 8px,
-    var(--color-pastel-blue) 11px,
-    transparent 11px,
-    transparent 12px,
-    var(--color-pastel-pink) 12px,
-    var(--color-pastel-pink) 15px,
-    transparent 15px,
-    transparent 16px,
-    var(--color-pastel-purple) 16px,
-    var(--color-pastel-purple) 19px,
-    transparent 19px,
-    transparent 20px
-  );
-  opacity: 0.7;
-  border-radius: 0 0 1px 1px;
-  /* フリンジの揺れ */
-  animation: fringeWave 4s ease-in-out infinite;
+/* タペストリー下部（三角形マクラメ風） */
+.tapestry-bottom {
+  position: relative;
+  margin-top: -2px;
 }
 
-@keyframes fringeWave {
-  0%, 100% { transform: skewX(0deg); }
-  25%      { transform: skewX(1.5deg); }
-  75%      { transform: skewX(-1.5deg); }
+.tapestry-triangle {
+  width: 0;
+  height: 0;
+  border-left: calc(50%) solid transparent;
+  border-right: calc(50%) solid transparent;
+  border-top: 40px solid var(--color-bg-card);
+  margin: 0 auto;
+  position: relative;
+  filter: drop-shadow(2px 3px 0px var(--color-border));
+}
+
+/* フリンジ（三角形の下にぶら下がる糸） */
+.tapestry-fringe {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-top: -2px;
+}
+
+.tapestry-fringe span {
+  width: 2px;
+  border-radius: 0 0 1px 1px;
+  animation: fringeSwing var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fringeSwing {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(3deg); }
+  75%      { transform: rotate(-3deg); }
 }
 
 .card-preview-right-controls {
