@@ -10,7 +10,7 @@ const defaultState = {
   cardImage: null,
   cardImageName: null,
   linkEnabled: false,
-  linkUrl: '',
+  links: [],
   linkColor: '#c5795a',
   animationType: 'slide-down',
   cardBackground: 'cream',

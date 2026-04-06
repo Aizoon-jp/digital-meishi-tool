@@ -78,10 +78,13 @@
         </div>
 
         <div class="link-options" id="link-options-wrap">
-          <div class="link-url-input visible" id="link-url-wrap">
-            <input type="url" class="input-field" id="link-url"
-                   placeholder="https://example.com">
+          <div class="link-list" id="link-list">
+            <!-- JSで生成 -->
           </div>
+
+          <button class="btn-add-link" id="btn-add-link" type="button">
+            <span>+</span> リンクを追加（最大5つ）
+          </button>
 
           <div class="link-color-row">
             <span class="qr-sub-label">リンクの色</span>
@@ -173,9 +176,8 @@
           <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
             <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
           </div>
-          <div class="preview-link" id="preview-link" style="display:none">
-            <span class="preview-link-icon">🌐</span>
-            <span class="preview-link-text" id="preview-link-text">example.com</span>
+          <div class="preview-links" id="preview-links">
+            <!-- JSで生成 -->
           </div>
         </div>
       </div>

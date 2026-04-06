@@ -43,10 +43,34 @@ function initStepIndicator() {
   sections.forEach(s => observer.observe(s));
 }
 
+const MAX_LINKS = 5;
+
+const LINK_ICONS = {
+  default: '🌐',
+  twitter: '𝕏',
+  instagram: '📷',
+  facebook: 'f',
+  youtube: '▶',
+  line: 'L',
+  tiktok: '♪',
+};
+
+function detectIcon(url) {
+  if (!url) return LINK_ICONS.default;
+  const u = url.toLowerCase();
+  if (u.includes('twitter') || u.includes('x.com')) return LINK_ICONS.twitter;
+  if (u.includes('instagram')) return LINK_ICONS.instagram;
+  if (u.includes('facebook')) return LINK_ICONS.facebook;
+  if (u.includes('youtube')) return LINK_ICONS.youtube;
+  if (u.includes('line.me')) return LINK_ICONS.line;
+  if (u.includes('tiktok')) return LINK_ICONS.tiktok;
+  return LINK_ICONS.default;
+}
+
 function initLinkConfig() {
   const toggle = document.getElementById('link-toggle');
   const optionsWrap = document.getElementById('link-options-wrap');
-  const urlInput = document.getElementById('link-url');
+  const addBtn = document.getElementById('btn-add-link');
   const colorGrid = document.getElementById('link-color-grid');
   const colorPicker = document.getElementById('link-color-picker');
 
@@ -55,26 +79,24 @@ function initLinkConfig() {
   toggle.addEventListener('change', () => {
     if (optionsWrap) optionsWrap.classList.toggle('visible', toggle.checked);
     saveState({ linkEnabled: toggle.checked });
+    if (toggle.checked && getLinks().length === 0) addLink();
     updateLinkPreview();
   });
 
-  if (urlInput) {
-    urlInput.addEventListener('input', () => {
-      saveState({ linkUrl: urlInput.value });
-      updateLinkPreview();
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      if (getLinks().length < MAX_LINKS) addLink();
     });
   }
 
-  // Link color selection
   if (colorGrid) {
     colorGrid.addEventListener('click', (e) => {
       const swatch = e.target.closest('.color-swatch');
       if (!swatch) return;
       colorGrid.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
       swatch.classList.add('active');
-      const color = swatch.dataset.color;
-      saveState({ linkColor: color });
-      if (colorPicker) colorPicker.value = color;
+      saveState({ linkColor: swatch.dataset.color });
+      if (colorPicker) colorPicker.value = swatch.dataset.color;
       updateLinkPreview();
     });
   }
@@ -88,28 +110,111 @@ function initLinkConfig() {
   }
 }
 
+function getLinks() {
+  const state = loadState();
+  return state.links || [];
+}
+
+function saveLinks(links) {
+  saveState({ links });
+  updateAddButton();
+  updateLinkPreview();
+}
+
+function addLink(label, url) {
+  const links = getLinks();
+  if (links.length >= MAX_LINKS) return;
+  links.push({ label: label || '', url: url || '' });
+  saveLinks(links);
+  renderLinkList();
+}
+
+function removeLink(index) {
+  const links = getLinks();
+  links.splice(index, 1);
+  saveLinks(links);
+  renderLinkList();
+}
+
+function updateLinkData(index, field, value) {
+  const links = getLinks();
+  if (links[index]) {
+    links[index][field] = value;
+    saveLinks(links);
+  }
+}
+
+function renderLinkList() {
+  const list = document.getElementById('link-list');
+  if (!list) return;
+
+  const links = getLinks();
+  list.innerHTML = links.map((link, i) => `
+    <div class="link-entry" data-index="${i}">
+      <div class="link-entry-label">
+        <input type="text" value="${link.label}" placeholder="表示名"
+               data-field="label" data-index="${i}">
+      </div>
+      <div class="link-entry-url">
+        <input type="url" value="${link.url}" placeholder="https://..."
+               data-field="url" data-index="${i}">
+      </div>
+      <button class="btn-remove-link" data-index="${i}" type="button">×</button>
+    </div>
+  `).join('');
+
+  // Event delegation
+  list.addEventListener('input', handleLinkInput);
+  list.addEventListener('click', handleLinkRemove);
+  updateAddButton();
+}
+
+function handleLinkInput(e) {
+  const input = e.target;
+  if (!input.dataset.field) return;
+  updateLinkData(parseInt(input.dataset.index), input.dataset.field, input.value);
+}
+
+function handleLinkRemove(e) {
+  const btn = e.target.closest('.btn-remove-link');
+  if (!btn) return;
+  removeLink(parseInt(btn.dataset.index));
+}
+
+function updateAddButton() {
+  const btn = document.getElementById('btn-add-link');
+  if (!btn) return;
+  const count = getLinks().length;
+  btn.disabled = count >= MAX_LINKS;
+  btn.textContent = count >= MAX_LINKS
+    ? '上限に達しました'
+    : `+ リンクを追加（${count}/${MAX_LINKS}）`;
+}
+
 function updateLinkPreview() {
   const state = loadState();
-  const linkEl = document.getElementById('preview-link');
-  const linkText = document.getElementById('preview-link-text');
-  if (!linkEl) return;
+  const container = document.getElementById('preview-links');
+  if (!container) return;
 
-  if (state.linkEnabled) {
-    linkEl.style.display = 'flex';
-    const color = state.linkColor || '#c5795a';
-    linkEl.style.color = color;
-    linkEl.style.borderColor = color + '66';
-    if (linkText) {
-      try {
-        const url = new URL(state.linkUrl || 'https://example.com');
-        linkText.textContent = url.hostname;
-      } catch {
-        linkText.textContent = state.linkUrl || 'example.com';
-      }
-    }
-  } else {
-    linkEl.style.display = 'none';
+  const links = state.links || [];
+  const color = state.linkColor || '#c5795a';
+
+  if (!state.linkEnabled || links.length === 0) {
+    container.innerHTML = '';
+    return;
   }
+
+  container.innerHTML = links.filter(l => l.label || l.url).map(link => {
+    const icon = detectIcon(link.url);
+    const display = link.label || (() => {
+      try { return new URL(link.url).hostname; } catch { return link.url || '...'; }
+    })();
+    return `
+      <div class="preview-link" style="color:${color};border-color:${color}66">
+        <span class="preview-link-icon">${icon}</span>
+        <span>${display}</span>
+      </div>`;
+  }).join('');
 }
 
 function initNavigation() {
@@ -335,13 +440,13 @@ function restoreState() {
   // Restore link toggle
   const toggle = document.getElementById('link-toggle');
   const optionsWrap = document.getElementById('link-options-wrap');
-  const urlInput = document.getElementById('link-url');
   if (toggle && state.linkEnabled) {
     toggle.checked = true;
     if (optionsWrap) optionsWrap.classList.add('visible');
   }
-  if (urlInput && state.linkUrl) {
-    urlInput.value = state.linkUrl;
+  // Restore link list
+  if (state.links && state.links.length > 0) {
+    renderLinkList();
   }
   // Restore link color
   if (state.linkColor) {

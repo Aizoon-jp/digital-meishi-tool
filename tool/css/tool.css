@@ -843,6 +843,134 @@
   display: block;
 }
 
+/* Link List */
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.link-entry {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.link-entry-label {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.link-entry-url {
+  flex: 1;
+}
+
+.link-entry-label input,
+.link-entry-url input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: var(--color-bg-input);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-hand);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  transition: border-color var(--transition);
+}
+
+.link-entry-label input:focus,
+.link-entry-url input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.link-entry-label input::placeholder,
+.link-entry-url input::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.btn-remove-link {
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-subtle);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.btn-remove-link:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.btn-add-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  background: var(--color-bg-input);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-hand);
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-add-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btn-add-link:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.btn-add-link span {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Preview Links */
+.preview-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  align-items: center;
+}
+
+.preview-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid rgba(197, 121, 90, 0.4);
+  border-radius: 5px;
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  width: 85%;
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.preview-link-icon {
+  font-size: 0.55rem;
+}
+
 .link-color-row {
   margin-top: 0.75rem;
 }
