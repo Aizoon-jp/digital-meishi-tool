@@ -36,12 +36,15 @@
 
 /* --- 4. Flip In --- */
 .anim-flip-in {
-  animation: animFlipIn 1s ease-out forwards;
-  perspective: 800px;
+  animation: animFlipIn 1.2s ease-out forwards;
+  transform-style: preserve-3d;
 }
 @keyframes animFlipIn {
-  from { opacity: 0; transform: perspective(800px) rotateY(90deg); }
-  to   { opacity: 1; transform: perspective(800px) rotateY(0); }
+  0%   { opacity: 0; transform: perspective(1000px) rotateY(-180deg) scale(0.8); }
+  40%  { opacity: 1; }
+  70%  { transform: perspective(1000px) rotateY(10deg) scale(1.02); }
+  85%  { transform: perspective(1000px) rotateY(-3deg) scale(0.99); }
+  100% { opacity: 1; transform: perspective(1000px) rotateY(0deg) scale(1); }
 }
 
 /* --- 5. Bounce In --- */

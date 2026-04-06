@@ -752,6 +752,28 @@
   border-radius: 50%;
 }
 
+/* --- Animation Layout (2-column with sticky preview) --- */
+.anim-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.anim-controls {
+  min-width: 0;
+}
+
+.anim-sticky-preview {
+  position: sticky;
+  top: 1rem;
+}
+
+.anim-sticky-preview .preview-container {
+  padding: 1.25rem;
+  min-height: 180px;
+}
+
 /* --- Animation Selection Grid --- */
 .anim-grid {
   display: grid;
@@ -921,6 +943,15 @@
     grid-template-columns: 1fr;
   }
 
+  .anim-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .anim-sticky-preview {
+    position: relative;
+    top: auto;
+  }
+
   .anim-grid {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
@@ -933,5 +964,9 @@
 @media (min-width: 601px) and (max-width: 800px) {
   .qr-layout {
     grid-template-columns: 1fr 180px;
+  }
+
+  .anim-layout {
+    grid-template-columns: 1fr 200px;
   }
 }

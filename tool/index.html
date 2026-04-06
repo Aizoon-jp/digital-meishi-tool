@@ -117,18 +117,24 @@
       </h2>
       <p class="section-desc">名刺が画面に現れるときの演出を選んでください</p>
 
-      <div class="anim-grid" id="anim-grid">
-        <!-- JS で生成 -->
-      </div>
+      <div class="anim-layout">
+        <div class="anim-controls">
+          <div class="anim-grid" id="anim-grid">
+            <!-- JS で生成 -->
+          </div>
 
-      <button class="play-btn" id="play-anim-btn" type="button">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        プレビュー再生
-      </button>
+          <button class="play-btn" id="play-anim-btn" type="button">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            もう一度再生
+          </button>
+        </div>
 
-      <div class="preview-container" id="anim-preview">
-        <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
-          <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+        <div class="anim-sticky-preview">
+          <div class="preview-container" id="anim-preview">
+            <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+              <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+            </div>
+          </div>
         </div>
       </div>
     </div>
