@@ -756,7 +756,7 @@
 /* --- Card Preview Group (④⑤ shared sticky preview) --- */
 .card-preview-group {
   max-width: 780px;
-  margin: 2rem auto 0;
+  margin: 0 auto;
   padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -770,6 +770,7 @@
   transform: translateY(-50%);
   align-self: start;
   text-align: center;
+  z-index: 10;
   animation: tapestrySwing 5s ease-in-out infinite;
 }
 
