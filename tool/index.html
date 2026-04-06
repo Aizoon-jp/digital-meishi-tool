@@ -116,13 +116,13 @@
       <p class="section-desc">形・色を選んでQRコードをカスタマイズ</p>
 
       <div class="qr-layout">
-        <div class="qr-controls" id="qr-customizer">
-          <!-- JS で生成 -->
-        </div>
         <div class="qr-sticky-preview">
           <div class="qr-preview-area" id="qr-preview">
             <!-- QR プレビューが入る -->
           </div>
+        </div>
+        <div class="qr-controls" id="qr-customizer">
+          <!-- JS で生成 -->
         </div>
       </div>
       <p id="qr-contrast-warning" class="qr-warning"></p>
@@ -131,7 +131,23 @@
 
   <!-- ④⑤ アニメーション+背景（プレビュー共有） -->
   <div class="card-preview-group">
-    <div class="card-preview-left">
+    <!-- スティッキープレビュー（左：スマホ風） -->
+    <div class="card-preview-left-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" id="anim-preview">
+          <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+            <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+          </div>
+          <div class="preview-links" id="preview-links">
+            <!-- JSで生成 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- コントロール（右） -->
+    <div class="card-preview-right-controls">
       <!-- ④ カード登場アニメーション -->
       <section class="section" id="section-animation">
         <div class="section-card">
@@ -167,62 +183,45 @@
         </div>
       </section>
     </div>
-
-    <!-- 共有スティッキープレビュー（スマホ風） -->
-    <div class="card-preview-right">
-      <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <div class="phone-screen" id="anim-preview">
-          <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
-            <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
-          </div>
-          <div class="preview-links" id="preview-links">
-            <!-- JSで生成 -->
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- ⑥ Zoom背景テンプレート + QR位置設定 -->
-  <section class="section" id="section-zoom-bg">
-    <div class="section-card">
-      <h2 class="section-title">
-        <span class="section-number">6</span>
-        ビデオ通話用背景作成
-      </h2>
-      <p class="section-desc">背景を選んで、QRコードの位置と大きさを調整してください</p>
-
-      <div id="zoom-bg-grid">
-        <!-- JS で生成 -->
-      </div>
-
-      <!-- QR位置設定: ドラッグで配置 -->
-      <h3 class="qr-position-title">QRコードの位置と大きさ</h3>
-      <p class="section-desc">ドラッグで位置を調整、スライダーで大きさを変更できます</p>
-
-      <div class="qr-size-control">
-        <label class="qr-size-label" for="qr-size-slider">
-          大きさ: <span id="qr-size-value">15</span>%
-        </label>
-        <input type="range" class="qr-size-slider" id="qr-size-slider"
-               min="8" max="25" value="15" step="1">
-        <span class="qr-size-hint">※ 読み取りに必要な最小サイズを下回りません</span>
-      </div>
-      <div class="qr-position-canvas-wrap">
-        <canvas id="qr-position-canvas" width="576" height="324"></canvas>
-        <div class="qr-position-drag" id="qr-drag-handle">
-          <div class="qr-drag-icon">QR</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ライブプレビュー (スティッキー) -->
-  <div class="live-preview-bar" id="live-preview-bar">
-    <div class="live-preview-inner">
+  <!-- ⑥ ビデオ通話用背景作成 -->
+  <div class="zoom-bg-group">
+    <div class="zoom-bg-preview-side">
       <canvas id="live-preview-canvas" width="384" height="216"></canvas>
-      <span class="live-preview-label">Zoom背景プレビュー</span>
+      <span class="zoom-preview-label">背景プレビュー</span>
+    </div>
+
+    <div class="zoom-bg-controls">
+      <section class="section" id="section-zoom-bg">
+        <div class="section-card">
+          <h2 class="section-title">
+            <span class="section-number">6</span>
+            ビデオ通話用背景作成
+          </h2>
+          <p class="section-desc">背景を選んで、QRコードの位置と大きさを調整</p>
+
+          <div id="zoom-bg-grid"></div>
+
+          <h3 class="qr-position-title">QRコードの位置と大きさ</h3>
+
+          <div class="qr-size-control">
+            <label class="qr-size-label" for="qr-size-slider">
+              大きさ: <span id="qr-size-value">15</span>%
+            </label>
+            <input type="range" class="qr-size-slider" id="qr-size-slider"
+                   min="8" max="25" value="15" step="1">
+            <span class="qr-size-hint">※ 読み取りに必要な最小サイズを下回りません</span>
+          </div>
+
+          <div class="qr-position-canvas-wrap">
+            <canvas id="qr-position-canvas" width="576" height="324"></canvas>
+            <div class="qr-position-drag" id="qr-drag-handle">
+              <div class="qr-drag-icon">QR</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 

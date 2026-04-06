@@ -281,32 +281,10 @@ function initMobileQRPreview() {
 
 // --- Live Preview: 背景+QR合成プレビュー ---
 function initLivePreview() {
-  const bar = document.getElementById('live-preview-bar');
   const canvas = document.getElementById('live-preview-canvas');
-  if (!bar || !canvas) return;
+  if (!canvas) return;
 
-  // QRセクションの下からライブプレビューを表示
-  const qrSection = document.getElementById('section-qr');
-  if (qrSection) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        // QRセクションが画面外に出たら（下にスクロールしたら）表示
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          bar.classList.add('visible');
-        } else {
-          bar.classList.remove('visible');
-        }
-      });
-    }, { threshold: 0 });
-
-    observer.observe(qrSection);
-  }
-
-  // 初回描画
   updateLivePreview();
-
-  // 背景やQRが変わったら再描画（MutationObserverでsessionStorage変更を検知）
-  const origSave = saveState;
   window._updateLivePreview = updateLivePreview;
 }
 

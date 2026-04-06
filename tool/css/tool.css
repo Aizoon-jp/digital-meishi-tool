@@ -412,10 +412,10 @@
   background: var(--color-accent-light);
 }
 
-/* --- QR Layout (2-column with sticky preview) --- */
+/* --- QR Layout (2-column: preview LEFT, controls RIGHT) --- */
 .qr-layout {
   display: grid;
-  grid-template-columns: 1fr 220px;
+  grid-template-columns: 200px 1fr;
   gap: 1.5rem;
   align-items: start;
 }
@@ -754,27 +754,69 @@
 
 /* --- Card Preview Group (④⑤ shared sticky preview) --- */
 .card-preview-group {
-  max-width: 720px;
+  max-width: 780px;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: grid;
-  grid-template-columns: 1fr 260px;
+  grid-template-columns: 220px 1fr;
   gap: 1.5rem;
   align-items: start;
 }
 
-.card-preview-left {
+.card-preview-left-phone {
+  position: sticky;
+  top: 1rem;
+}
+
+.card-preview-right-controls {
   min-width: 0;
 }
 
-.card-preview-left .section {
+.card-preview-right-controls .section {
   padding: 0;
   max-width: none;
 }
 
-.card-preview-right {
+/* --- Zoom BG Group (⑥ with side preview) --- */
+.zoom-bg-group {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.zoom-bg-preview-side {
   position: sticky;
   top: 1rem;
+  text-align: center;
+}
+
+.zoom-bg-preview-side canvas {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.zoom-preview-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.4rem;
+}
+
+.zoom-bg-controls {
+  min-width: 0;
+}
+
+.zoom-bg-controls .section {
+  padding: 0;
+  max-width: none;
 }
 
 /* Phone Frame */
@@ -1208,18 +1250,21 @@
     grid-template-columns: 1fr;
   }
 
-  .card-preview-group {
+  .card-preview-group,
+  .zoom-bg-group {
     grid-template-columns: 1fr;
     padding: 0;
   }
 
-  .card-preview-left .section {
+  .card-preview-left-phone,
+  .zoom-bg-preview-side {
+    position: relative;
+    top: auto;
     padding: 0 1.5rem;
   }
 
-  .card-preview-right {
-    position: relative;
-    top: auto;
+  .card-preview-right-controls .section,
+  .zoom-bg-controls .section {
     padding: 0 1.5rem;
   }
 
@@ -1234,10 +1279,11 @@
 
 @media (min-width: 601px) and (max-width: 800px) {
   .qr-layout {
-    grid-template-columns: 1fr 180px;
+    grid-template-columns: 160px 1fr;
   }
 
-  .card-preview-group {
-    grid-template-columns: 1fr 200px;
+  .card-preview-group,
+  .zoom-bg-group {
+    grid-template-columns: 180px 1fr;
   }
 }
