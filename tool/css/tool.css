@@ -415,7 +415,7 @@
 /* --- QR Layout (2-column: preview LEFT, controls RIGHT) --- */
 .qr-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 200px 1fr;
   gap: 1.5rem;
   align-items: start;
 }
@@ -426,7 +426,7 @@
 
 .qr-sticky-preview {
   position: sticky;
-  top: calc(50vh - 170px);
+  top: 1rem;
 }
 
 /* ロケットフレーム */
