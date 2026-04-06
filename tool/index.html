@@ -108,17 +108,18 @@
     </div>
   </section>
 
-  <!-- ④ カード登場アニメーション -->
-  <section class="section" id="section-animation">
-    <div class="section-card">
-      <h2 class="section-title">
-        <span class="section-number">4</span>
-        カード登場アニメーション
-      </h2>
-      <p class="section-desc">名刺が画面に現れるときの演出を選んでください</p>
+  <!-- ④⑤ アニメーション+背景（プレビュー共有） -->
+  <div class="card-preview-group">
+    <div class="card-preview-left">
+      <!-- ④ カード登場アニメーション -->
+      <section class="section" id="section-animation">
+        <div class="section-card">
+          <h2 class="section-title">
+            <span class="section-number">4</span>
+            カード登場アニメーション
+          </h2>
+          <p class="section-desc">名刺が画面に現れるときの演出を選んでください</p>
 
-      <div class="anim-layout">
-        <div class="anim-controls">
           <div class="anim-grid" id="anim-grid">
             <!-- JS で生成 -->
           </div>
@@ -128,32 +129,33 @@
             もう一度再生
           </button>
         </div>
+      </section>
 
-        <div class="anim-sticky-preview">
-          <div class="preview-container" id="anim-preview">
-            <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
-              <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
-            </div>
+      <!-- ⑤ 名刺ページの背景 -->
+      <section class="section" id="section-card-bg">
+        <div class="section-card">
+          <h2 class="section-title">
+            <span class="section-number">5</span>
+            名刺ページの背景
+          </h2>
+          <p class="section-desc">QRコードで開いたときのページ背景色を選んでください</p>
+
+          <div class="card-bg-grid" id="card-bg-grid">
+            <!-- JS で生成 -->
           </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 共有スティッキープレビュー -->
+    <div class="card-preview-right">
+      <div class="preview-container" id="anim-preview">
+        <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+          <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ⑤ 名刺ページの背景 -->
-  <section class="section" id="section-card-bg">
-    <div class="section-card">
-      <h2 class="section-title">
-        <span class="section-number">5</span>
-        名刺ページの背景
-      </h2>
-      <p class="section-desc">QRコードで開いたときのページ背景色を選んでください</p>
-
-      <div class="card-bg-grid" id="card-bg-grid">
-        <!-- JS で生成 -->
-      </div>
-    </div>
-  </section>
+  </div>
 
   <!-- ⑥ Zoom背景テンプレート + QR位置設定 -->
   <section class="section" id="section-zoom-bg">

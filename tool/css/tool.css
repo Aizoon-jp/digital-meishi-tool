@@ -752,26 +752,34 @@
   border-radius: 50%;
 }
 
-/* --- Animation Layout (2-column with sticky preview) --- */
-.anim-layout {
+/* --- Card Preview Group (④⑤ shared sticky preview) --- */
+.card-preview-group {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 1fr 260px;
   gap: 1.5rem;
   align-items: start;
 }
 
-.anim-controls {
+.card-preview-left {
   min-width: 0;
 }
 
-.anim-sticky-preview {
+.card-preview-left .section {
+  padding: 0;
+  max-width: none;
+}
+
+.card-preview-right {
   position: sticky;
   top: 1rem;
 }
 
-.anim-sticky-preview .preview-container {
+.card-preview-right .preview-container {
   padding: 1.25rem;
-  min-height: 180px;
+  min-height: 200px;
 }
 
 /* --- Animation Selection Grid --- */
@@ -943,13 +951,19 @@
     grid-template-columns: 1fr;
   }
 
-  .anim-layout {
+  .card-preview-group {
     grid-template-columns: 1fr;
+    padding: 0;
   }
 
-  .anim-sticky-preview {
+  .card-preview-left .section {
+    padding: 0 1.5rem;
+  }
+
+  .card-preview-right {
     position: relative;
     top: auto;
+    padding: 0 1.5rem;
   }
 
   .anim-grid {
@@ -966,7 +980,7 @@
     grid-template-columns: 1fr 180px;
   }
 
-  .anim-layout {
+  .card-preview-group {
     grid-template-columns: 1fr 200px;
   }
 }
