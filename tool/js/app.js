@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLinkConfig();
   initAnimationPreviewer();
   initCardBackgroundSelector();
+  initDemoTabs();
   initNavigation();
   initMobileQRPreview();
   initQRPosition();
@@ -81,6 +82,21 @@ function initNavigation() {
     }
 
     window.location.href = 'confirm.html';
+  });
+}
+
+function initDemoTabs() {
+  const tabs = document.querySelectorAll('.demo-tab');
+  const panels = document.querySelectorAll('.demo-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('demo-' + tab.dataset.demo);
+      if (panel) panel.classList.add('active');
+    });
   });
 }
 
