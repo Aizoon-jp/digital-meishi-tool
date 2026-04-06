@@ -412,11 +412,12 @@
   background: var(--color-accent-light);
 }
 
-/* --- QR Layout (preview on top, controls below) --- */
+/* --- QR Layout (2-column: preview LEFT, controls RIGHT) --- */
 .qr-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 
 .qr-controls {
@@ -424,15 +425,13 @@
 }
 
 .qr-sticky-preview {
-  position: relative;
-  top: auto;
+  position: sticky;
+  top: 1rem;
 }
 
 .qr-sticky-preview .qr-preview-area {
   padding: 1rem;
   min-height: auto;
-  max-width: 200px;
-  margin: 0 auto;
 }
 
 /* --- QR Customizer --- */
@@ -766,18 +765,16 @@
 
 .card-preview-left-phone {
   position: sticky;
-  top: 50vh;
-  transform: translateY(-50%);
+  top: 2rem;
   align-self: start;
   text-align: center;
-  z-index: 10;
   animation: tapestrySwing 5s ease-in-out infinite;
 }
 
 @keyframes tapestrySwing {
-  0%, 100% { transform: translateY(-50%) rotate(0deg); }
-  25%      { transform: translateY(-50%) rotate(0.8deg); }
-  75%      { transform: translateY(-50%) rotate(-0.8deg); }
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(0.8deg); }
+  75%      { transform: rotate(-0.8deg); }
 }
 
 /* クレヨン風の天使たち */
@@ -933,8 +930,7 @@
 
 .zoom-bg-preview-side {
   position: sticky;
-  top: 50vh;
-  transform: translateY(-50%);
+  top: 2rem;
   text-align: center;
   align-self: start;
   animation: tapestrySwing 5.5s ease-in-out infinite;
