@@ -764,8 +764,14 @@
 }
 
 .card-preview-left-phone {
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-hand);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
   position: sticky;
   top: 1rem;
+  align-self: start;
 }
 
 .card-preview-right-controls {
@@ -789,9 +795,15 @@
 }
 
 .zoom-bg-preview-side {
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-hand);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
   position: sticky;
   top: 1rem;
   text-align: center;
+  align-self: start;
 }
 
 .zoom-bg-preview-side canvas {
@@ -822,9 +834,9 @@
 /* Phone Frame */
 .phone-frame {
   background: #1a1a1a;
-  border-radius: 28px;
-  padding: 8px;
-  box-shadow: var(--shadow-card), 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  padding: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
 }
 
