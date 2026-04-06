@@ -764,14 +764,64 @@
 }
 
 .card-preview-left-phone {
-  background: var(--color-bg-card);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-hand);
-  padding: 1rem;
-  box-shadow: var(--shadow-card);
   position: sticky;
   top: 1rem;
   align-self: start;
+  text-align: center;
+}
+
+/* 鳥がタペストリーを咥えて運ぶ描写 */
+.card-preview-left-phone::before {
+  content: '🐦';
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: -0.3rem;
+  animation: birdFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* タペストリーの紐 */
+.card-preview-left-phone::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 12px;
+  background: var(--color-craft-border);
+  margin: 0 auto -2px;
+  border-radius: 1px;
+}
+
+@keyframes birdFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-6px) rotate(2deg); }
+}
+
+/* タペストリー風フレーム */
+.tapestry-frame {
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: 4px 4px 8px 8px;
+  padding: 0.6rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+/* タペストリー下部のフリンジ */
+.tapestry-frame::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 10%;
+  right: 10%;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-craft-border) 0px,
+    var(--color-craft-border) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  opacity: 0.5;
 }
 
 .card-preview-right-controls {
@@ -795,15 +845,37 @@
 }
 
 .zoom-bg-preview-side {
-  background: var(--color-bg-card);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-hand);
-  padding: 1rem;
-  box-shadow: var(--shadow-card);
   position: sticky;
   top: 1rem;
   text-align: center;
   align-self: start;
+}
+
+/* 鳥+タペストリー（⑥用） */
+.zoom-bg-preview-side::before {
+  content: '🐦';
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: -0.2rem;
+  animation: birdFloat 3.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.zoom-bg-preview-side::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 10px;
+  background: var(--color-craft-border);
+  margin: 0 auto -2px;
+  border-radius: 1px;
+}
+
+.zoom-bg-preview-side canvas {
+  border: 2px solid var(--color-border);
+  border-radius: 4px 4px 8px 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .zoom-bg-preview-side canvas {
@@ -850,9 +922,9 @@
 
 .phone-screen {
   background: var(--color-bg-dark);
-  border-radius: 20px;
-  padding: 1.5rem 1rem;
-  min-height: 320px;
+  border-radius: 18px;
+  padding: 1rem 0.75rem;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
