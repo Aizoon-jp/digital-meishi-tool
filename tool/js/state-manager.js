@@ -15,6 +15,7 @@ const defaultState = {
   animationType: 'slide-down',
   cardBackground: 'cream',
   qrPosition: { x: 82, y: 78 },
+  qrSize: 15,
 };
 
 export function loadState() {

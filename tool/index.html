@@ -189,17 +189,26 @@
     <div class="section-card">
       <h2 class="section-title">
         <span class="section-number">6</span>
-        Zoom背景 &amp; QRコードの配置
+        ビデオ通話用背景作成
       </h2>
-      <p class="section-desc">背景を選んで、QRコードの位置をドラッグで調整してください</p>
+      <p class="section-desc">背景を選んで、QRコードの位置と大きさを調整してください</p>
 
       <div id="zoom-bg-grid">
         <!-- JS で生成 -->
       </div>
 
       <!-- QR位置設定: ドラッグで配置 -->
-      <h3 class="qr-position-title">QRコードの位置</h3>
-      <p class="section-desc">プレビュー上のQRコードをドラッグして好きな位置に動かせます</p>
+      <h3 class="qr-position-title">QRコードの位置と大きさ</h3>
+      <p class="section-desc">ドラッグで位置を調整、スライダーで大きさを変更できます</p>
+
+      <div class="qr-size-control">
+        <label class="qr-size-label" for="qr-size-slider">
+          大きさ: <span id="qr-size-value">15</span>%
+        </label>
+        <input type="range" class="qr-size-slider" id="qr-size-slider"
+               min="8" max="25" value="15" step="1">
+        <span class="qr-size-hint">※ 読み取りに必要な最小サイズを下回りません</span>
+      </div>
       <div class="qr-position-canvas-wrap">
         <canvas id="qr-position-canvas" width="576" height="324"></canvas>
         <div class="qr-position-drag" id="qr-drag-handle">

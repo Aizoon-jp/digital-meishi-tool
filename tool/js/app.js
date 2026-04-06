@@ -339,8 +339,9 @@ function updateLivePreview() {
     drawBokeh(ctx, w, h);
   }
 
-  // QRコード配置（ユーザー設定位置）
-  const qrSize = Math.round(w * 0.15);
+  // QRコード配置（ユーザー設定位置+サイズ）
+  const qrSizePct = state.qrSize || 15;
+  const qrSize = Math.round(w * qrSizePct / 100);
   const qrPosition = state.qrPosition || { x: 82, y: 78 };
   const qrX = (qrPosition.x / 100) * w - qrSize / 2;
   const qrY = (qrPosition.y / 100) * h - qrSize / 2;

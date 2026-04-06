@@ -6,6 +6,8 @@ import { ZOOM_BACKGROUNDS } from './background-selector.js';
 
 // QR position as percentage (0-100) of background
 let qrPos = { x: 82, y: 78 }; // default: bottom-right
+let qrSizePct = 15; // percentage of background width
+const MIN_SIZE_PCT = 8; // minimum for readability
 
 export function initQRPosition() {
   const wrap = document.querySelector('.qr-position-canvas-wrap');
@@ -13,12 +15,30 @@ export function initQRPosition() {
   const canvas = document.getElementById('qr-position-canvas');
   if (!wrap || !handle || !canvas) return;
 
-  // Restore saved position
-  const saved = loadState().qrPosition;
-  if (saved) qrPos = saved;
+  // Restore saved position & size
+  const state = loadState();
+  if (state.qrPosition) qrPos = state.qrPosition;
+  if (state.qrSize) qrSizePct = state.qrSize;
+
+  // Size slider
+  const slider = document.getElementById('qr-size-slider');
+  const sizeLabel = document.getElementById('qr-size-value');
+  if (slider) {
+    slider.value = qrSizePct;
+    if (sizeLabel) sizeLabel.textContent = qrSizePct;
+
+    slider.addEventListener('input', () => {
+      qrSizePct = Math.max(MIN_SIZE_PCT, parseInt(slider.value));
+      if (sizeLabel) sizeLabel.textContent = qrSizePct;
+      updateHandleSize();
+      drawPositionPreview();
+      saveState({ qrSize: qrSizePct });
+      if (window._updateLivePreview) window._updateLivePreview();
+    });
+  }
 
   drawPositionPreview();
-  positionHandle();
+  updateHandleSize();
 
   // Drag logic (mouse + touch)
   let dragging = false;
@@ -86,8 +106,21 @@ export function initQRPosition() {
 function positionHandle() {
   const handle = document.getElementById('qr-drag-handle');
   if (!handle) return;
-  handle.style.left = `calc(${qrPos.x}% - 30px)`;
-  handle.style.top = `calc(${qrPos.y}% - 30px)`;
+  const halfSize = handle.offsetWidth / 2;
+  handle.style.left = `calc(${qrPos.x}% - ${halfSize}px)`;
+  handle.style.top = `calc(${qrPos.y}% - ${halfSize}px)`;
+}
+
+function updateHandleSize() {
+  const handle = document.getElementById('qr-drag-handle');
+  const wrap = document.querySelector('.qr-position-canvas-wrap');
+  if (!handle || !wrap) return;
+  const wrapWidth = wrap.offsetWidth;
+  const size = Math.max(30, Math.round(wrapWidth * qrSizePct / 100));
+  handle.style.width = size + 'px';
+  handle.style.height = size + 'px';
+  handle.querySelector('.qr-drag-icon').style.fontSize = Math.max(0.5, size / 80) + 'rem';
+  positionHandle();
 }
 
 function drawPositionPreview() {
@@ -142,8 +175,8 @@ function drawPositionPreview() {
     });
   }
 
-  // QR position indicator
-  const qrSize = 48;
+  // QR position indicator (size based on slider)
+  const qrSize = Math.round(w * qrSizePct / 100);
   const qx = (qrPos.x / 100) * w - qrSize / 2;
   const qy = (qrPos.y / 100) * h - qrSize / 2;
 
