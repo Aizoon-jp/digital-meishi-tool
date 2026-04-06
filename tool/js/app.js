@@ -45,20 +45,70 @@ function initStepIndicator() {
 
 function initLinkConfig() {
   const toggle = document.getElementById('link-toggle');
-  const urlWrap = document.getElementById('link-url-wrap');
+  const optionsWrap = document.getElementById('link-options-wrap');
   const urlInput = document.getElementById('link-url');
+  const colorGrid = document.getElementById('link-color-grid');
+  const colorPicker = document.getElementById('link-color-picker');
 
-  if (!toggle || !urlWrap) return;
+  if (!toggle) return;
 
   toggle.addEventListener('change', () => {
-    urlWrap.classList.toggle('visible', toggle.checked);
+    if (optionsWrap) optionsWrap.classList.toggle('visible', toggle.checked);
     saveState({ linkEnabled: toggle.checked });
+    updateLinkPreview();
   });
 
   if (urlInput) {
     urlInput.addEventListener('input', () => {
       saveState({ linkUrl: urlInput.value });
+      updateLinkPreview();
     });
+  }
+
+  // Link color selection
+  if (colorGrid) {
+    colorGrid.addEventListener('click', (e) => {
+      const swatch = e.target.closest('.color-swatch');
+      if (!swatch) return;
+      colorGrid.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      const color = swatch.dataset.color;
+      saveState({ linkColor: color });
+      if (colorPicker) colorPicker.value = color;
+      updateLinkPreview();
+    });
+  }
+
+  if (colorPicker) {
+    colorPicker.addEventListener('input', () => {
+      saveState({ linkColor: colorPicker.value });
+      if (colorGrid) colorGrid.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      updateLinkPreview();
+    });
+  }
+}
+
+function updateLinkPreview() {
+  const state = loadState();
+  const linkEl = document.getElementById('preview-link');
+  const linkText = document.getElementById('preview-link-text');
+  if (!linkEl) return;
+
+  if (state.linkEnabled) {
+    linkEl.style.display = 'flex';
+    const color = state.linkColor || '#c5795a';
+    linkEl.style.color = color;
+    linkEl.style.borderColor = color + '66';
+    if (linkText) {
+      try {
+        const url = new URL(state.linkUrl || 'https://example.com');
+        linkText.textContent = url.hostname;
+      } catch {
+        linkText.textContent = state.linkUrl || 'example.com';
+      }
+    }
+  } else {
+    linkEl.style.display = 'none';
   }
 }
 
@@ -284,15 +334,27 @@ function restoreState() {
 
   // Restore link toggle
   const toggle = document.getElementById('link-toggle');
-  const urlWrap = document.getElementById('link-url-wrap');
+  const optionsWrap = document.getElementById('link-options-wrap');
   const urlInput = document.getElementById('link-url');
   if (toggle && state.linkEnabled) {
     toggle.checked = true;
-    if (urlWrap) urlWrap.classList.add('visible');
+    if (optionsWrap) optionsWrap.classList.add('visible');
   }
   if (urlInput && state.linkUrl) {
     urlInput.value = state.linkUrl;
   }
+  // Restore link color
+  if (state.linkColor) {
+    const grid = document.getElementById('link-color-grid');
+    const picker = document.getElementById('link-color-picker');
+    if (grid) {
+      grid.querySelectorAll('.color-swatch').forEach(s => {
+        s.classList.toggle('active', s.dataset.color === state.linkColor);
+      });
+    }
+    if (picker) picker.value = state.linkColor;
+  }
+  updateLinkPreview();
 
   // Restore uploaded image
   if (state.cardImage) {

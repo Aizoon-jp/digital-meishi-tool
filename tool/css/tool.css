@@ -777,9 +777,84 @@
   top: 1rem;
 }
 
-.card-preview-right .preview-container {
-  padding: 1.25rem;
-  min-height: 200px;
+/* Phone Frame */
+.phone-frame {
+  background: #1a1a1a;
+  border-radius: 28px;
+  padding: 8px;
+  box-shadow: var(--shadow-card), 0 8px 24px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.phone-notch {
+  width: 60px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  margin: 6px auto 8px;
+}
+
+.phone-screen {
+  background: var(--color-bg-dark);
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+  transition: background-color var(--transition);
+}
+
+.phone-screen .preview-card {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Link Preview in Phone */
+.preview-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(197, 121, 90, 0.4);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.preview-link-icon {
+  font-size: 0.65rem;
+}
+
+/* Link Options */
+.link-options {
+  display: none;
+  margin-top: 0.75rem;
+}
+
+.link-options.visible {
+  display: block;
+}
+
+.link-color-row {
+  margin-top: 0.75rem;
+}
+
+.link-color-row .color-grid {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.link-color-row .color-row {
+  margin-top: 0.3rem;
 }
 
 /* --- Animation Selection Grid --- */

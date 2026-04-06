@@ -206,9 +206,9 @@ export function initCardBackgroundSelector() {
     item.classList.add('active');
     saveState({ cardBackground: item.dataset.bg });
 
-    const preview = document.getElementById('anim-preview');
     const bg = CARD_BACKGROUNDS.find(b => b.id === item.dataset.bg);
-    if (preview && bg) preview.style.backgroundColor = bg.css;
+    const screen = document.querySelector('.phone-screen');
+    if (screen && bg) screen.style.backgroundColor = bg.css;
   });
 }
 

@@ -77,9 +77,27 @@
           <label class="toggle-label" for="link-toggle">リンクを表示する</label>
         </div>
 
-        <div class="link-url-input" id="link-url-wrap">
-          <input type="url" class="input-field" id="link-url"
-                 placeholder="https://example.com">
+        <div class="link-options" id="link-options-wrap">
+          <div class="link-url-input visible" id="link-url-wrap">
+            <input type="url" class="input-field" id="link-url"
+                   placeholder="https://example.com">
+          </div>
+
+          <div class="link-color-row">
+            <span class="qr-sub-label">リンクの色</span>
+            <div class="color-row">
+              <div class="color-grid" id="link-color-grid">
+                <div class="color-swatch active" data-color="#c5795a" style="background:#c5795a"></div>
+                <div class="color-swatch" data-color="#e74c3c" style="background:#e74c3c"></div>
+                <div class="color-swatch" data-color="#2196f3" style="background:#2196f3"></div>
+                <div class="color-swatch" data-color="#27ae60" style="background:#27ae60"></div>
+                <div class="color-swatch" data-color="#9b59b6" style="background:#9b59b6"></div>
+                <div class="color-swatch" data-color="#333333" style="background:#333333"></div>
+                <div class="color-swatch" data-color="#ffffff" style="background:#ffffff;border:1px solid var(--color-border)"></div>
+              </div>
+              <input type="color" class="color-picker" id="link-color-picker" value="#c5795a">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -147,11 +165,18 @@
       </section>
     </div>
 
-    <!-- 共有スティッキープレビュー -->
+    <!-- 共有スティッキープレビュー（スマホ風） -->
     <div class="card-preview-right">
-      <div class="preview-container" id="anim-preview">
-        <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
-          <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" id="anim-preview">
+          <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+            <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
+          </div>
+          <div class="preview-link" id="preview-link" style="display:none">
+            <span class="preview-link-icon">🌐</span>
+            <span class="preview-link-text" id="preview-link-text">example.com</span>
+          </div>
         </div>
       </div>
     </div>

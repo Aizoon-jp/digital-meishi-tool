@@ -11,6 +11,7 @@ const defaultState = {
   cardImageName: null,
   linkEnabled: false,
   linkUrl: '',
+  linkColor: '#c5795a',
   animationType: 'slide-down',
   cardBackground: 'cream',
   qrPosition: { x: 82, y: 78 },
