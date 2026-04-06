@@ -769,6 +769,13 @@
   transform: translateY(-50%);
   align-self: start;
   text-align: center;
+  animation: tapestrySwing 5s ease-in-out infinite;
+}
+
+@keyframes tapestrySwing {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  25%      { transform: translateY(-50%) rotate(0.8deg); }
+  75%      { transform: translateY(-50%) rotate(-0.8deg); }
 }
 
 /* クレヨン風の天使たち */
@@ -839,44 +846,74 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
-/* タペストリー上部のポール風 */
+/* タペストリー上部のポール（太め・木の棒風） */
 .tapestry-frame::before {
   content: '';
   position: absolute;
-  top: -5px;
-  left: -4px;
-  right: -4px;
-  height: 8px;
-  background: var(--color-craft-border);
-  border-radius: 4px;
-  opacity: 0.6;
+  top: -10px;
+  left: -8px;
+  right: -8px;
+  height: 14px;
+  background: linear-gradient(180deg, #C9B89E 0%, #B5A48A 40%, #A89478 60%, #C4B498 100%);
+  border-radius: 7px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.12);
 }
 
-/* タペストリー下部のフリンジ */
+/* ポールの端の丸い飾り */
+.tapestry-pole-end-l,
+.tapestry-pole-end-r {
+  position: absolute;
+  top: -14px;
+  width: 10px;
+  height: 10px;
+  background: #A89478;
+  border-radius: 50%;
+  border: 1.5px solid #8D7E66;
+}
+.tapestry-pole-end-l { left: -12px; }
+.tapestry-pole-end-r { right: -12px; }
+
+/* タペストリー下部のフリンジ（長め+太め） */
 .tapestry-frame::after {
   content: '';
   position: absolute;
-  bottom: -10px;
-  left: 5%;
-  right: 5%;
-  height: 10px;
+  bottom: -20px;
+  left: 3%;
+  right: 3%;
+  height: 20px;
   background: repeating-linear-gradient(
     90deg,
     var(--color-pastel-peach) 0px,
     var(--color-pastel-peach) 3px,
     transparent 3px,
-    transparent 5px,
-    var(--color-pastel-green) 5px,
-    var(--color-pastel-green) 8px,
+    transparent 4px,
+    var(--color-pastel-green) 4px,
+    var(--color-pastel-green) 7px,
+    transparent 7px,
     transparent 8px,
-    transparent 10px,
-    var(--color-pastel-blue) 10px,
-    var(--color-pastel-blue) 13px,
-    transparent 13px,
-    transparent 15px
+    var(--color-pastel-blue) 8px,
+    var(--color-pastel-blue) 11px,
+    transparent 11px,
+    transparent 12px,
+    var(--color-pastel-pink) 12px,
+    var(--color-pastel-pink) 15px,
+    transparent 15px,
+    transparent 16px,
+    var(--color-pastel-purple) 16px,
+    var(--color-pastel-purple) 19px,
+    transparent 19px,
+    transparent 20px
   );
-  opacity: 0.6;
-  border-radius: 0 0 2px 2px;
+  opacity: 0.7;
+  border-radius: 0 0 1px 1px;
+  /* フリンジの揺れ */
+  animation: fringeWave 4s ease-in-out infinite;
+}
+
+@keyframes fringeWave {
+  0%, 100% { transform: skewX(0deg); }
+  25%      { transform: skewX(1.5deg); }
+  75%      { transform: skewX(-1.5deg); }
 }
 
 .card-preview-right-controls {
@@ -905,6 +942,8 @@
   transform: translateY(-50%);
   text-align: center;
   align-self: start;
+  animation: tapestrySwing 5.5s ease-in-out infinite;
+  animation-delay: 0.5s;
 }
 
 .angels-carry--sm {
