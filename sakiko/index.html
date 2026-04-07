@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社翔け橋 - 松永 沙貴子</title>
+  <meta name="description" content="いまのあなたと、未来のあなたをつなぐ。株式会社翔け橋 取締役 松永 沙貴子">
+  <meta property="og:title" content="株式会社翔け橋 - 松永 沙貴子">
+  <meta property="og:description" content="いまのあなたと、未来のあなたをつなぐ。">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      font-family: 'Noto Serif JP', 'Cormorant Garamond', serif;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 背景: 明るい未来の光（Gemini生成画像 + 彩度を少し落とす） */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url('assets/bg.jpg') center/cover no-repeat;
+      filter: saturate(0.85) brightness(0.88) sepia(0.05) hue-rotate(10deg);
+      z-index: -2;
+    }
+
+    .card-container {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(30px) scale(0.96);
+      animation: cardReveal 3s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    }
+
+    .card-wrapper {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 20px 60px rgba(0, 0, 0, 0.12);
+      background: #fff;
+      opacity: 0;
+      animation: wrapperFade 2s ease 1.5s forwards;
+    }
+
+    .card-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+    }
+
+    .shine {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 70%,
+        transparent 100%
+      );
+      animation: shineMove 1.5s ease-in-out 4s forwards;
+      pointer-events: none;
+    }
+
+    .tagline {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: rgba(44, 95, 63, 0.8);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      opacity: 0;
+      animation: taglineReveal 2s ease 5s forwards;
+    }
+
+    /* ふんわり名刺出現: ぼかし→クリア + 浮き上がり */
+    @keyframes cardReveal {
+      0% {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translateY(30px) scale(0.96);
+      }
+      40% {
+        opacity: 0.6;
+        filter: blur(6px);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* カード本体のフェードイン */
+    @keyframes wrapperFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* シャイン（ゆっくり） */
+    @keyframes shineMove {
+      to {
+        left: 150%;
+      }
+    }
+
+    /* タグラインのふんわり出現 */
+    @keyframes taglineReveal {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1.5rem 0.75rem;
+      }
+
+      .card-container {
+        max-width: 100%;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card-wrapper">
+      <img src="assets/card.jpg" alt="株式会社翔け橋 - 松永 沙貴子 名刺" class="card-img" loading="eager">
+      <div class="shine"></div>
+    </div>
+
+    <p class="tagline">いまのあなたと、未来のあなたをつなぐ。</p>
+  </div>
+</body>
+</html>
