@@ -1,12 +1,12 @@
 /**
  * App - Main orchestrator for the tool page
  */
-import { loadState, saveState } from './state-manager.js';
-import { initImageUploader } from './image-uploader.js';
-import { initAnimationPreviewer } from './animation-previewer.js';
-import { initCardBackgroundSelector, initZoomBackgroundSelector, ZOOM_BACKGROUNDS } from './background-selector.js';
-import { initQRGenerator } from './qr-generator.js';
-import { initQRPosition } from './qr-position.js';
+import { loadState, saveState } from './state-manager.js?v=6';
+import { initImageUploader } from './image-uploader.js?v=6';
+import { initAnimationPreviewer } from './animation-previewer.js?v=6';
+import { initCardBackgroundSelector, initZoomBackgroundSelector, ZOOM_BACKGROUNDS, findBackground, applyBackgroundToScreen } from './background-selector.js?v=6';
+import { initQRGenerator } from './qr-generator.js?v=6';
+import { initQRPosition } from './qr-position.js?v=6';
 
 document.addEventListener('DOMContentLoaded', () => {
   initStepIndicator();

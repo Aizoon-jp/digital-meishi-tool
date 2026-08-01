@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/tool.css">
+  <link rel="stylesheet" href="css/tool.css?v=5">
   <script src="https://unpkg.com/qr-code-styling@1.8.4/lib/qr-code-styling.js"></script>
 </head>
 <body>
@@ -131,21 +131,16 @@
 
   <!-- ④⑤ アニメーション+背景（プレビュー共有） -->
   <div class="card-preview-group">
-    <!-- スティッキープレビュー（左：天使タペストリー画像） -->
+    <!-- スティッキープレビュー（左：シンプルスマホ） -->
     <div class="card-preview-left-phone">
-      <div class="tapestry-img-wrap">
-        <img src="assets/tapestry-birds.png" alt="" class="tapestry-bg-img">
-        <div class="tapestry-phone-slot">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen" id="anim-preview">
-              <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
-                <img id="anim-preview-img" src="../assets/card.jpg" alt="名刺プレビュー">
-              </div>
-              <div class="preview-links" id="preview-links">
-                <!-- JSで生成 -->
-              </div>
-            </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" id="anim-preview">
+          <div class="preview-card anim-reset" id="anim-preview-card" style="position:relative">
+            <img id="anim-preview-img" src="assets/sample-card.jpg" alt="名刺プレビュー">
+          </div>
+          <div class="preview-links" id="preview-links">
+            <!-- JSで生成 -->
           </div>
         </div>
       </div>
@@ -193,12 +188,7 @@
   <!-- ⑥ ビデオ通話用背景作成 -->
   <div class="zoom-bg-group">
     <div class="zoom-bg-preview-side">
-      <div class="tapestry-img-wrap tapestry-img-wrap--sm">
-        <img src="assets/tapestry-birds.png" alt="" class="tapestry-bg-img">
-        <div class="tapestry-phone-slot tapestry-canvas-slot">
-          <canvas id="live-preview-canvas" width="384" height="216"></canvas>
-        </div>
-      </div>
+      <canvas id="live-preview-canvas" width="384" height="216"></canvas>
       <span class="zoom-preview-label">背景プレビュー</span>
     </div>
 
@@ -230,6 +220,7 @@
               <div class="qr-drag-icon">QR</div>
             </div>
           </div>
+          <p style="text-align:center; color:#c5795a; font-size:0.85rem; margin-top:0.5rem; letter-spacing:0.03em;">ドラッグでQRの位置を調整</p>
         </div>
       </section>
     </div>
@@ -245,6 +236,6 @@
     </button>
   </div>
 
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/app.js?v=6"></script>
 </body>
 </html>

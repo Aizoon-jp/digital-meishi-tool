@@ -5,26 +5,155 @@
 import { saveState } from './state-manager.js';
 
 // --- 名刺ページ背景（QR読み取り先の背景色）---
+// ライト → ナチュラル → カラー → ダーク の順（薄→濃）
 const CARD_BACKGROUNDS = [
-  // ダーク系
-  { id: 'navy',        name: 'ネイビー',       css: '#1a1f2e', category: 'dark' },
-  { id: 'charcoal',    name: 'チャコール',     css: '#1e1e1e', category: 'dark' },
-  { id: 'midnight',    name: 'ミッドナイト',   css: '#0d1117', category: 'dark' },
-  { id: 'slate',       name: 'スレート',       css: '#2d3748', category: 'dark' },
   // ライト系
-  { id: 'white',       name: 'ホワイト',       css: '#f8f9fa', category: 'light' },
-  { id: 'cream',       name: 'クリーム',       css: '#FFF8F0', category: 'light' },
-  { id: 'soft-gray',   name: 'ソフトグレー',   css: '#ecf0f1', category: 'light' },
+  { id: 'white',       name: 'ホワイト',       css: '#f8f9fa',   category: 'light' },
+  { id: 'cream',       name: 'クリーム',       css: '#FFF8F0',   category: 'light' },
+  { id: 'milk',        name: 'ミルク',         css: '#fefcf3',   category: 'light' },
+  { id: 'pearl',       name: 'パール',         css: '#f0eff4',   category: 'light' },
+  { id: 'ice-blue',    name: 'アイスブルー',   css: '#eef3f7',   category: 'light' },
+  { id: 'soft-gray',   name: 'ソフトグレー',   css: '#ecf0f1',   category: 'light' },
   // ナチュラル系
-  { id: 'beige',       name: 'ベージュ',       css: '#f5e6d3', category: 'natural' },
-  { id: 'sage',        name: 'セージ',         css: '#d4ddd0', category: 'natural' },
-  { id: 'warm-sand',   name: 'サンド',         css: '#e8d5b7', category: 'natural' },
+  { id: 'beige',       name: 'ベージュ',       css: '#f5e6d3',   category: 'natural' },
+  { id: 'warm-sand',   name: 'サンド',         css: '#e8d5b7',   category: 'natural' },
+  { id: 'terracotta-l',name: 'テラコッタ',     css: '#f0d9c8',   category: 'natural' },
+  { id: 'sage',        name: 'セージ',         css: '#d4ddd0',   category: 'natural' },
+  { id: 'moss',        name: 'モス',           css: '#c5ceb5',   category: 'natural' },
+  { id: 'linen',       name: 'リネン',         css: '#e8ddd3',   category: 'natural' },
   // カラー系
-  { id: 'rose',        name: 'ローズ',         css: '#f4e2d8', category: 'color' },
-  { id: 'lavender',    name: 'ラベンダー',     css: '#e8dff5', category: 'color' },
-  { id: 'mint',        name: 'ミント',         css: '#e0f2f1', category: 'color' },
-  { id: 'sky',         name: 'スカイ',         css: '#e3f2fd', category: 'color' },
+  { id: 'rose',        name: 'ローズ',         css: '#f4e2d8',   category: 'color' },
+  { id: 'blush',       name: 'ブラッシュ',     css: '#fce4ec',   category: 'color' },
+  { id: 'peach',       name: 'ピーチ',         css: '#fde8d8',   category: 'color' },
+  { id: 'lavender',    name: 'ラベンダー',     css: '#e8dff5',   category: 'color' },
+  { id: 'mint',        name: 'ミント',         css: '#e0f2f1',   category: 'color' },
+  { id: 'sky',         name: 'スカイ',         css: '#e3f2fd',   category: 'color' },
+  { id: 'aqua',        name: 'アクア',         css: '#e0f7fa',   category: 'color' },
+  { id: 'lilac',       name: 'ライラック',     css: '#ede7f6',   category: 'color' },
+  // ダーク系
+  { id: 'slate',       name: 'スレート',       css: '#4a5568',   category: 'dark' },
+  { id: 'dark-teal',   name: 'ティール',       css: '#2c6e6f',   category: 'dark' },
+  { id: 'navy',        name: 'ネイビー',       css: '#2b3a5e',   category: 'dark' },
+  { id: 'forest',      name: 'フォレスト',     css: '#2d5a2d',   category: 'dark' },
+  { id: 'wine',        name: 'ワイン',         css: '#5c2340',   category: 'dark' },
+  { id: 'charcoal',    name: 'チャコール',     css: '#3a3a3a',   category: 'dark' },
+  { id: 'midnight',    name: 'ミッドナイト',   css: '#1a2030',   category: 'dark' },
 ];
+
+// --- グラデーション背景 ---
+const CARD_GRADIENTS = [
+  // ライト系グラデーション
+  { id: 'g-sunrise',     name: 'サンライズ',     css: 'linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)',          category: 'g-light' },
+  { id: 'g-morning',     name: 'モーニング',     css: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',          category: 'g-light' },
+  { id: 'g-cotton',      name: 'コットン',       css: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',          category: 'g-light' },
+  { id: 'g-peach-warm',  name: 'ピーチウォーム', css: 'linear-gradient(135deg, #fff5ee 0%, #fde2d4 50%, #f8c4b4 100%)', category: 'g-light' },
+  // カラー系グラデーション
+  { id: 'g-lavender',    name: 'ラベンダー',     css: 'linear-gradient(135deg, #e8dff5 0%, #d4c5f0 50%, #c0aceb 100%)', category: 'g-color' },
+  { id: 'g-ocean',       name: 'オーシャン',     css: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',          category: 'g-color' },
+  { id: 'g-aurora',      name: 'オーロラ',       css: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #d4c5f0 100%)', category: 'g-color' },
+  { id: 'g-candy',       name: 'キャンディ',     css: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',          category: 'g-color' },
+  { id: 'g-mint-fresh',  name: 'ミントフレッシュ',css: 'linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)',         category: 'g-color' },
+  { id: 'g-sunset',      name: 'サンセット',     css: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',          category: 'g-color' },
+  // ダーク系グラデーション
+  { id: 'g-deep-blue',   name: 'ディープブルー', css: 'linear-gradient(135deg, #0c3547 0%, #1a1f2e 100%)',          category: 'g-dark' },
+  { id: 'g-dark-wine',   name: 'ダークワイン',   css: 'linear-gradient(135deg, #3c1053 0%, #ad5389 100%)',          category: 'g-dark' },
+  { id: 'g-night-sky',   name: 'ナイトスカイ',   css: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)', category: 'g-dark' },
+  { id: 'g-forest-d',    name: 'ディープフォレスト',css: 'linear-gradient(135deg, #0b3d0b 0%, #1a3c2a 50%, #2d4a3e 100%)', category: 'g-dark' },
+];
+
+// --- パターン背景 ---
+const CARD_PATTERNS = [
+  {
+    id: 'p-wave',      name: 'ウェーブ',
+    css: `#eef3f7`,
+    pattern: `radial-gradient(circle at 100% 150%, #eef3f7 24%, #d4e4f0 24%, #d4e4f0 28%, #eef3f7 28%, #eef3f7 36%, #d4e4f0 36%, #d4e4f0 40%, transparent 40%), radial-gradient(circle at 0% 150%, #eef3f7 24%, #d4e4f0 24%, #d4e4f0 28%, #eef3f7 28%, #eef3f7 36%, #d4e4f0 36%, #d4e4f0 40%, transparent 40%)`,
+    patternSize: '50px 25px',
+    category: 'pattern',
+  },
+  {
+    id: 'p-wave-warm', name: 'ウェーブウォーム',
+    css: `#fff5ee`,
+    pattern: `radial-gradient(circle at 100% 150%, #fff5ee 24%, #f0d9c8 24%, #f0d9c8 28%, #fff5ee 28%, #fff5ee 36%, #f0d9c8 36%, #f0d9c8 40%, transparent 40%), radial-gradient(circle at 0% 150%, #fff5ee 24%, #f0d9c8 24%, #f0d9c8 28%, #fff5ee 28%, #fff5ee 36%, #f0d9c8 36%, #f0d9c8 40%, transparent 40%)`,
+    patternSize: '50px 25px',
+    category: 'pattern',
+  },
+  {
+    id: 'p-dots',      name: 'ドット',
+    css: `#f8f9fa`,
+    pattern: `radial-gradient(circle, #ddd 1px, transparent 1px)`,
+    patternSize: '20px 20px',
+    category: 'pattern',
+  },
+  {
+    id: 'p-dots-warm', name: 'ドットウォーム',
+    css: `#FFF8F0`,
+    pattern: `radial-gradient(circle, #e8d5b7 1.2px, transparent 1.2px)`,
+    patternSize: '18px 18px',
+    category: 'pattern',
+  },
+  {
+    id: 'p-stripe',    name: 'ストライプ',
+    css: `#f8f9fa`,
+    pattern: `repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(0,0,0,0.03) 12px, rgba(0,0,0,0.03) 24px)`,
+    category: 'pattern',
+  },
+  {
+    id: 'p-stripe-color', name: 'ストライプカラー',
+    css: `#ede7f6`,
+    pattern: `repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(149,117,205,0.08) 12px, rgba(149,117,205,0.08) 24px)`,
+    category: 'pattern',
+  },
+  {
+    id: 'p-grid',      name: 'グリッド',
+    css: `#f0eff4`,
+    pattern: `linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)`,
+    patternSize: '24px 24px',
+    category: 'pattern',
+  },
+  {
+    id: 'p-diamond',   name: 'ダイヤモンド',
+    css: `#eef3f7`,
+    pattern: `linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%), linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%)`,
+    patternSize: '30px 30px',
+    patternPosition: '0 0, 15px 15px',
+    category: 'pattern',
+  },
+];
+
+// 全背景を統合検索するヘルパー
+function findBackground(id) {
+  return CARD_BACKGROUNDS.find(b => b.id === id)
+    || CARD_GRADIENTS.find(b => b.id === id)
+    || CARD_PATTERNS.find(b => b.id === id);
+}
+
+// 背景CSSをphone-screenに適用
+function applyBackgroundToScreen(screen, bg) {
+  if (!screen || !bg) return;
+  // リセット
+  screen.style.background = '';
+  screen.style.backgroundSize = '';
+  screen.style.backgroundPosition = '';
+
+  if (bg.pattern) {
+    // パターン背景
+    screen.style.backgroundColor = bg.css;
+    if (bg.pattern.startsWith('url(')) {
+      // SVG波形: 背景色 + 下部にSVG
+      screen.style.background = `${bg.pattern} no-repeat bottom / 100% auto, ${bg.css}`;
+    } else {
+      screen.style.background = `${bg.pattern}, ${bg.css}`;
+      if (bg.patternSize) screen.style.backgroundSize = bg.patternSize;
+      if (bg.patternPosition) screen.style.backgroundPosition = bg.patternPosition;
+    }
+  } else if (bg.css.startsWith('linear-gradient') || bg.css.startsWith('radial-gradient')) {
+    // グラデーション
+    screen.style.background = bg.css;
+  } else {
+    // ソリッドカラー
+    screen.style.backgroundColor = bg.css;
+  }
+}
 
 // --- Zoom背景テンプレート ---
 const ZOOM_BACKGROUNDS = [
@@ -38,6 +167,16 @@ const ZOOM_BACKGROUNDS = [
     id: 'minimal-warm', name: 'ミニマル・ウォーム',
     category: 'ミニマル',
     gradient: 'linear-gradient(135deg, #f5f0eb 0%, #ebe4db 50%, #e0d6ca 100%)',
+  },
+  {
+    id: 'minimal-gray', name: 'ミニマル・グレー',
+    category: 'ミニマル',
+    gradient: 'linear-gradient(135deg, #fafafa 0%, #f2f3f5 50%, #ecedef 100%)',
+  },
+  {
+    id: 'minimal-pink', name: 'ミニマル・ピンク',
+    category: 'ミニマル',
+    gradient: 'linear-gradient(135deg, #fffafa 0%, #fdf2f4 50%, #fae8ec 100%)',
   },
   // 爽やか・希望（コーチング向け）
   {
@@ -178,27 +317,82 @@ export function initCardBackgroundSelector() {
   const grid = document.getElementById('card-bg-grid');
   if (!grid) return;
 
-  // カテゴリ別に表示
-  const categories = [...new Set(CARD_BACKGROUNDS.map(b => b.category))];
-  let html = '';
+  let currentTab = 'solid';
 
-  categories.forEach(cat => {
-    const catName = { dark: 'ダーク', light: 'ライト', natural: 'ナチュラル', color: 'カラー' }[cat];
-    html += `<div class="card-bg-category-label">${catName}</div>`;
-    html += '<div class="card-bg-row">';
-    CARD_BACKGROUNDS.filter(b => b.category === cat).forEach(bg => {
-      html += `
-        <div class="card-bg-item${bg.id === 'cream' ? ' active' : ''}"
-             data-bg="${bg.id}" style="background: ${bg.css}"
-             title="${bg.name}">
-        </div>`;
-    });
+  function render(tab) {
+    currentTab = tab;
+    let html = '';
+
+    // タブUI
+    html += '<div class="card-bg-tabs">';
+    html += `<button class="card-bg-tab${tab === 'solid' ? ' active' : ''}" data-tab="solid">ソリッド</button>`;
+    html += `<button class="card-bg-tab${tab === 'gradient' ? ' active' : ''}" data-tab="gradient">グラデーション</button>`;
+    html += `<button class="card-bg-tab${tab === 'pattern' ? ' active' : ''}" data-tab="pattern">パターン</button>`;
     html += '</div>';
-  });
 
-  grid.innerHTML = html;
+    if (tab === 'solid') {
+      const catOrder = ['light', 'natural', 'color', 'dark'];
+      const catNames = { light: 'ライト', natural: 'ナチュラル', color: 'カラー', dark: 'ダーク' };
+      catOrder.forEach(cat => {
+        html += `<div class="card-bg-category-label">${catNames[cat]}</div>`;
+        html += '<div class="card-bg-row">';
+        CARD_BACKGROUNDS.filter(b => b.category === cat).forEach(bg => {
+          html += `
+            <div class="card-bg-item${bg.id === 'white' ? ' active' : ''}"
+                 data-bg="${bg.id}" style="background: ${bg.css}"
+                 title="${bg.name}"></div>`;
+        });
+        html += '</div>';
+      });
+    } else if (tab === 'gradient') {
+      const catOrder = ['g-light', 'g-color', 'g-dark'];
+      const catNames = { 'g-light': 'ライト', 'g-color': 'カラー', 'g-dark': 'ダーク' };
+      catOrder.forEach(cat => {
+        html += `<div class="card-bg-category-label">${catNames[cat]}</div>`;
+        html += '<div class="card-bg-row card-bg-row--gradient">';
+        CARD_GRADIENTS.filter(b => b.category === cat).forEach(bg => {
+          html += `
+            <div class="card-bg-item card-bg-item--gradient"
+                 data-bg="${bg.id}" style="background: ${bg.css}"
+                 title="${bg.name}">
+              <span class="card-bg-item-label">${bg.name}</span>
+            </div>`;
+        });
+        html += '</div>';
+      });
+    } else if (tab === 'pattern') {
+      html += '<div class="card-bg-row card-bg-row--pattern">';
+      CARD_PATTERNS.forEach(bg => {
+        let previewStyle = `background: ${bg.pattern}, ${bg.css};`;
+        if (bg.patternSize) previewStyle += `background-size: ${bg.patternSize};`;
+        if (bg.patternPosition) previewStyle += `background-position: ${bg.patternPosition};`;
+        if (bg.pattern.startsWith('url(')) {
+          previewStyle = `background: ${bg.pattern} no-repeat bottom / 100% auto, ${bg.css};`;
+        }
+        html += `
+          <div class="card-bg-item card-bg-item--pattern"
+               data-bg="${bg.id}" style="${previewStyle}"
+               title="${bg.name}">
+            <span class="card-bg-item-label">${bg.name}</span>
+          </div>`;
+      });
+      html += '</div>';
+    }
+
+    grid.innerHTML = html;
+  }
+
+  render('solid');
 
   grid.addEventListener('click', (e) => {
+    // タブ切替
+    const tab = e.target.closest('.card-bg-tab');
+    if (tab) {
+      render(tab.dataset.tab);
+      return;
+    }
+
+    // 背景選択
     const item = e.target.closest('.card-bg-item');
     if (!item) return;
 
@@ -206,9 +400,9 @@ export function initCardBackgroundSelector() {
     item.classList.add('active');
     saveState({ cardBackground: item.dataset.bg });
 
-    const bg = CARD_BACKGROUNDS.find(b => b.id === item.dataset.bg);
+    const bg = findBackground(item.dataset.bg);
     const screen = document.querySelector('.phone-screen');
-    if (screen && bg) screen.style.backgroundColor = bg.css;
+    applyBackgroundToScreen(screen, bg);
   });
 }
 
@@ -229,9 +423,9 @@ export function initZoomBackgroundSelector() {
         : `background: ${bg.gradient};`;
       html += `
         <div class="bg-template-item${bg.id === 'bright-future' ? ' active' : ''}"
-             data-bg="${bg.id}">
-          <div class="bg-template-preview" style="${bokehStyle}"></div>
-          <div class="bg-template-label">${bg.name}</div>
+             data-bg="${bg.id}" style="overflow:visible">
+          <div class="bg-template-preview" style="${bokehStyle} aspect-ratio:16/9; border-radius:inherit; overflow:hidden"></div>
+          <div style="display:block; padding:0.35rem 0 0; color:#c5795a; font-size:0.85rem; text-align:center; letter-spacing:0.02em">${bg.name}</div>
         </div>`;
     });
     html += '</div>';
@@ -250,4 +444,4 @@ export function initZoomBackgroundSelector() {
   });
 }
 
-export { CARD_BACKGROUNDS, ZOOM_BACKGROUNDS };
+export { CARD_BACKGROUNDS, CARD_GRADIENTS, CARD_PATTERNS, ZOOM_BACKGROUNDS, findBackground, applyBackgroundToScreen };

@@ -195,11 +195,7 @@ function drawPositionPreview() {
   drawMiniFinderPattern(ctx, qx + qrSize - fp - 2, qy + 2, fp, qd.cornerColor || '#000');
   drawMiniFinderPattern(ctx, qx + 2, qy + qrSize - fp - 2, fp, qd.cornerColor || '#000');
 
-  // Guide text
-  ctx.fillStyle = 'rgba(255,255,255,0.7)';
-  ctx.font = '12px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('ドラッグでQRの位置を調整', w / 2, h - 10);
+  // Guide text removed from canvas - now displayed as HTML below
 }
 
 function drawMiniFinderPattern(ctx, x, y, size, color) {

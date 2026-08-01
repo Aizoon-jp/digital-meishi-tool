@@ -426,7 +426,7 @@
 
 .qr-sticky-preview {
   position: sticky;
-  top: 1rem;
+  top: calc(50vh - 150px);
 }
 
 /* ロケットフレーム */
@@ -650,8 +650,8 @@
 .zoom-bg-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 0.6rem;
-  margin-bottom: 0.5rem;
+  gap: 1.8rem 0.6rem;
+  margin-bottom: 0.4rem;
 }
 
 .bg-template-preview {
@@ -668,13 +668,17 @@
 
 .bg-template-item {
   position: relative;
-  aspect-ratio: 16 / 9;
   background: var(--color-bg-input);
   border: 2px solid transparent;
   border-radius: var(--radius);
-  overflow: hidden;
   cursor: pointer;
   transition: all var(--transition);
+}
+
+.bg-template-item .bg-template-preview {
+  aspect-ratio: 16 / 9;
+  border-radius: inherit;
+  overflow: hidden;
 }
 
 .bg-template-item:hover {
@@ -693,15 +697,14 @@
 }
 
 .bg-template-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.5rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  color: #fff;
-  font-size: 0.75rem;
+  display: block;
+  padding: 0.35rem 0 0;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 500;
   text-align: center;
+  letter-spacing: 0.02em;
 }
 
 /* --- Zoom Background Preview --- */
@@ -736,6 +739,36 @@
 }
 
 /* --- Card Background Section --- */
+
+.card-bg-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-bg-tab {
+  flex: 1;
+  padding: 0.4rem 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.card-bg-tab:hover {
+  border-color: var(--color-accent);
+}
+
+.card-bg-tab.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
 .card-bg-category-label {
   font-family: var(--font-display);
   font-size: 0.75rem;
@@ -772,7 +805,8 @@
 }
 
 .card-bg-item:hover {
-  border-color: var(--color-border);
+  border-color: var(--color-accent);
+  transform: scale(1.1);
 }
 
 .card-bg-item.active {
@@ -791,72 +825,96 @@
   font-weight: bold;
   color: #fff;
   background: rgba(0,0,0,0.25);
-  border-radius: 50%;
+  border-radius: inherit;
+}
+
+/* グラデーション・パターンのカードアイテム */
+.card-bg-item.card-bg-item--gradient,
+.card-bg-item.card-bg-item--pattern {
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  aspect-ratio: 16 / 9;
+  min-width: 90px;
+  flex: 1 1 90px;
+  max-width: 150px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.3rem;
+}
+
+.card-bg-item.card-bg-item--gradient.active::after,
+.card-bg-item.card-bg-item--pattern.active::after {
+  border-radius: 8px;
+}
+
+.card-bg-row--gradient,
+.card-bg-row--pattern {
+  gap: 0.5rem;
+}
+
+.card-bg-item-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: rgba(0,0,0,0.5);
+  text-shadow: 0 0 4px rgba(255,255,255,0.8);
+  pointer-events: none;
+}
+
+/* ダーク系グラデーションのラベル色 */
+.card-bg-item--gradient[data-bg^="g-deep"] .card-bg-item-label,
+.card-bg-item--gradient[data-bg^="g-dark"] .card-bg-item-label,
+.card-bg-item--gradient[data-bg^="g-night"] .card-bg-item-label,
+.card-bg-item--gradient[data-bg^="g-forest"] .card-bg-item-label {
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
 
 /* --- Card Preview Group (④⑤ shared sticky preview) --- */
 .card-preview-group {
   max-width: 780px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: start;
 }
 
 .card-preview-left-phone {
   position: sticky;
-  top: 2rem;
+  top: calc(50vh - 200px);
   align-self: start;
   text-align: center;
-  animation: tapestrySwing 5s ease-in-out infinite;
 }
 
-@keyframes tapestrySwing {
-  0%, 100% { transform: rotate(0deg); }
-  25%      { transform: rotate(0.8deg); }
-  75%      { transform: rotate(-0.8deg); }
+.card-preview-left-phone .phone-frame {
+  background: #1a1f2e;
+  border-radius: 24px;
+  padding: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  max-width: 200px;
+  margin: 0 auto;
 }
 
-/* タペストリー画像フレーム */
-.tapestry-img-wrap {
-  position: relative;
-  width: 100%;
+.card-preview-left-phone .phone-notch {
+  width: 40px;
+  height: 4px;
+  background: #333;
+  border-radius: 4px;
+  margin: 4px auto 6px;
 }
 
-.tapestry-bg-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* スマホ画面を画像の中央透明部分に配置 */
-.tapestry-phone-slot {
-  position: absolute;
-  top: 35%;
-  left: 21%;
-  right: 21%;
-  bottom: 24%;
-}
-
-.tapestry-phone-slot .phone-frame {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  padding: 3px;
-}
-
-.tapestry-phone-slot .phone-notch {
-  width: 36px;
-  height: 3px;
-  margin: 2px auto 3px;
-}
-
-.tapestry-phone-slot .phone-screen {
-  border-radius: 8px;
-  padding: 0.4rem 0.3rem;
-  min-height: 0;
+.card-preview-left-phone .phone-screen {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 0.6rem 0.5rem;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ⑥用 Canvas版 */
@@ -886,24 +944,26 @@
   max-width: none;
 }
 
+.card-preview-right-controls .section + .section {
+  margin-top: 2rem;
+}
+
 /* --- Zoom BG Group (⑥ with side preview) --- */
 .zoom-bg-group {
   max-width: 780px;
-  margin: 0 auto 1.5rem;
+  margin: 2rem auto 2rem;
   padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: start;
 }
 
 .zoom-bg-preview-side {
   position: sticky;
-  top: 2rem;
+  top: calc(50vh - 100px);
   text-align: center;
   align-self: start;
-  animation: tapestrySwing 5.5s ease-in-out infinite;
-  animation-delay: 0.5s;
 }
 
 .zoom-bg-preview-side canvas {

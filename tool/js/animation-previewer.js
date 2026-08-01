@@ -15,8 +15,8 @@ const ANIMATIONS = [
   { id: 'shine',       name: 'シャイン',       class: 'anim-shine' },
   { id: 'cascade',     name: 'カスケード',     class: 'anim-cascade' },
   { id: 'sparkle',     name: 'キラキラ',       class: 'anim-sparkle' },
-  { id: 'transform',   name: '変身',           class: 'anim-transform' },
   { id: 'dramatic',    name: 'ドラマチック',   class: 'anim-dramatic' },
+  { id: 'transform',   name: '変身',           class: 'anim-transform' },
   { id: 'bishoujo',    name: '美少女戦士',     class: 'anim-bishoujo' },
 ];
 
